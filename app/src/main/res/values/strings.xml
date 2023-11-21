@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">baby care</string>
+    <string name="welcome">Welcome To [app_name]</string>
+    <string name="welcome_sub_txt">Mature alongside your little one as they navigate the journey of growing up.</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="sign_in_to">Sign in to continue</string>
+    <string name="username_or_password">Username Or Email</string>
+    <string name="password">Password</string>
+    <string name="conf_password">Confirm password</string>
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="dont_have_account">Don\'t have an account? </string>
+    <string name="already_have_account">Already have an account? </string>
+    <string name="lets_get_started">Let\'s Get Started</string>
+    <string name="create_an_account">Create an account to [app name] to get all features</string>
+    <string name="select_child">Select Child</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!--   nav items-->
+    <string name="home">Home</string>
+    <string name="children">Children</string>
+    <string name="activities">Activities</string>
+    <string name="growth_charts">Growth Charts</string>
+    <string name="diaper">Diaper</string>
+    <string name="feeding">Feeding</string>
+    <string name="healthcare">Healthcare</string>
+    <string name="notes">Notes</string>
+    <string name="sleeping">Sleeping</string>
+    <string name="logout">Logout</string>
+    <string name="open_nav">Open navigation bar</string>
+    <string name="close_nav">Close navigation bar</string>
+
+</resources>

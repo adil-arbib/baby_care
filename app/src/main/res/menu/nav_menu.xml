@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/nav_children"
+            android:icon="@drawable/ic_child"
+            android:title="@string/children" />
+        <item
+            android:id="@+id/nav_feeding"
+            android:icon="@drawable/ic_feeding"
+            android:title="@string/feeding" />
+        <item
+            android:id="@+id/nav_diaper"
+            android:icon="@drawable/ic_diaper"
+            android:title="@string/diaper" />
+        <item
+            android:id="@+id/nav_sleeping"
+            android:icon="@drawable/ic_sleeping"
+            android:title="@string/sleeping" />
+        <item
+            android:id="@+id/nav_activities"
+            android:icon="@drawable/ic_activity"
+            android:title="@string/activities" />
+        <item
+            android:id="@+id/nav_healthcare"
+            android:icon="@drawable/ic_healthcare"
+            android:title="@string/healthcare" />
+        <item
+            android:id="@+id/nav_notes"
+            android:icon="@drawable/ic_note"
+            android:title="@string/notes" />
+        <item
+            android:id="@+id/nav_charts"
+            android:icon="@drawable/ic_charts"
+            android:title="@string/growth_charts" />
+
+    </group>
+
+    <item
+        android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/logout"/>
+        </menu>
+    </item>
+
+</menu>

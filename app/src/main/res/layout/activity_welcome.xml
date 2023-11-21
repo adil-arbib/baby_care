@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="40dp"
+    android:paddingEnd="40dp"
+    tools:context=".activities.WelcomeActivity">
+
+    <TextView
+        android:id="@+id/txt_welcome_to"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/txt_welcome_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jost_semi_bold"
+        android:textSize="23sp"
+        android:textColor="@color/black"
+        android:text="@string/welcome">
+    </TextView>
+
+    <TextView
+        android:id="@+id/txt_welcome_sub"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/img_baby_illustration"
+        android:layout_marginBottom="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:text="@string/welcome_sub_txt">
+    </TextView>
+    
+    
+    <ImageView
+        android:id="@+id/img_baby_illustration"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/baby_moon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="-40dp"
+        />
+
+    <Button
+        android:id="@+id/btn_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_baby_illustration"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/jost_semi_bold"
+        android:background="@drawable/solid_btn"
+        android:text="@string/sign_in"
+        />
+
+    <Button
+        android:id="@+id/btn_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        android:textColor="@color/primary"
+        android:fontFamily="@font/jost_semi_bold"
+        android:background="@drawable/border_btn"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sign_in"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
