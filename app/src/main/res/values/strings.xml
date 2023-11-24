@@ -39,5 +39,12 @@
     <string name="logout">Logout</string>
     <string name="open_nav">Open navigation bar</string>
     <string name="close_nav">Close navigation bar</string>
+    <string name="daily_program">Daily Program</string>
+    <string name="remaining_activities">5 activities have been completed, and 3 are still remaining</string>
+    <string name="completed">Completed</string>
+    <string name="tips">Tips</string>
+    <string name="learn_more">Learn more</string>
+    <string name="activity_log">Activity log</string>
+    <string name="see_all">See All</string>
 
 </resources>

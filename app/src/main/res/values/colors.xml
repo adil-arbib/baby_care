@@ -6,8 +6,13 @@
 <!--    <color name="teal_200">#FF03DAC5</color>-->
 <!--    <color name="teal_700">#FF018786</color>-->
     <color name="black">#FF000000</color>
+    <color name="medium_black">#151515</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#C58DF4</color>
     <color name="light_grey">#EFEFEF</color>
     <color name="light_purple">#E3E3FF</color>
+    <color name="purple">#9898FF</color>
+    <color name="medium_purple">#D1D1F9</color>
+    <color name="tips_purple">#B8B8FF</color>
+    <color name="green">#20C64E</color>
 </resources>
