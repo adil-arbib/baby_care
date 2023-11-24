@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 
 }

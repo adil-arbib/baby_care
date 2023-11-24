@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.groupe6.babycare.R;
 import com.groupe6.babycare.adapters.ActivityLogAdapter;
 import com.groupe6.babycare.databinding.FragmentHomeBinding;
 import com.groupe6.babycare.dtos.activities.SimpleActivityDTO;
@@ -34,6 +35,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener<Simple
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        getActivity().setTitle(R.string.home);
         binding.progressBar.setProgress(70);
         binding.txtPercentage.setText("70%");
 

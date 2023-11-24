@@ -17,4 +17,8 @@
 
 
     </style>
+
+    <style name="MyToolbarStyle" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorSecondary">#333333</item>
+    </style>
 </resources>

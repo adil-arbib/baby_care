@@ -8,11 +8,18 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
     tools:context=".activities.MainActivity">
+
+
+
     
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+<!--        <include-->
+<!--            android:id="@+id/toolbar"-->
+<!--            layout="@layout/toolbar"/>-->
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
