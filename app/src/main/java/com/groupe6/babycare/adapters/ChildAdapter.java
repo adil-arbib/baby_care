@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.groupe6.babycare.R;
 import com.groupe6.babycare.dtos.ChildDTO;
-import com.groupe6.babycare.listeners.ChildOnClickListener;
+import com.groupe6.babycare.listeners.OnChildClickListener;
 
 import java.util.List;
 
@@ -20,9 +20,9 @@ public class ChildAdapter extends BaseAdapter {
     private List<ChildDTO> children;
     private Context context;
 
-    private ChildOnClickListener childOnClickListener;
+    private OnChildClickListener childOnClickListener;
 
-    public ChildAdapter(Context context, List<ChildDTO> children, final ChildOnClickListener childOnClickListener) {
+    public ChildAdapter(Context context, List<ChildDTO> children, final OnChildClickListener childOnClickListener) {
         this.children = children;
         this.context = context;
         this.childOnClickListener = childOnClickListener;

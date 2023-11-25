@@ -46,5 +46,16 @@
     <string name="learn_more">Learn more</string>
     <string name="activity_log">Activity log</string>
     <string name="see_all">See All</string>
+    <string name="add_child">Add Child</string>
+    <string name="name">Name</string>
+    <string name="birthdate">Birthdate</string>
+    <string name="boy">Boy</string>
+    <string name="girl">Girl</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
 
 </resources>

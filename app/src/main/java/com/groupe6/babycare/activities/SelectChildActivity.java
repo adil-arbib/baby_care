@@ -6,19 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.groupe6.babycare.R;
 import com.groupe6.babycare.adapters.ChildAdapter;
-import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.ActivitySelectChildBinding;
 import com.groupe6.babycare.dtos.ChildDTO;
 import com.groupe6.babycare.holders.GlobalObjectsHolder;
-import com.groupe6.babycare.listeners.ChildOnClickListener;
+import com.groupe6.babycare.listeners.OnChildClickListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SelectChildActivity extends AppCompatActivity implements ChildOnClickListener {
+public class SelectChildActivity extends AppCompatActivity implements OnChildClickListener {
 
     private ActivitySelectChildBinding binding;
 

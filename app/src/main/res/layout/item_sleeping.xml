@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/feeding_item" xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/light_purple"
+    android:elevation="5dp"
+    app:cardCornerRadius="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+
+    <TextView
+        android:id="@+id/txt_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/from"
+        android:fontFamily="@font/jost_semi_bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/txt_from_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:00 PM"
+            android:fontFamily="@font/jost_bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/txt_from"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/txt_To"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/to"
+            android:fontFamily="@font/jost_semi_bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/txt_from"/>
+
+
+        <TextView
+            android:id="@+id/txt_to_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8:00 AM"
+            android:fontFamily="@font/jost_bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/txt_from_value"
+            app:layout_constraintTop_toTopOf="@id/txt_To"
+            app:layout_constraintBottom_toBottomOf="@id/txt_To"/>
+
+
+        <TextView
+            android:id="@+id/txt_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nov 26, 2032"
+            android:fontFamily="@font/jost_bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/txt_from_value"
+            app:layout_constraintTop_toTopOf="@id/txt_from"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/txt_To"/>
+
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/toggle_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

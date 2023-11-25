@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/feeding_item" xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/light_purple"
+    android:elevation="5dp"
+    app:cardCornerRadius="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/img_feeding"
+            android:layout_width="wrap_content"
+            android:backgroundTint="@color/blue"
+            app:cardCornerRadius="5dp"
+            android:elevation="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/img_feeding_type"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="7dp"
+                android:src="@drawable/baby_bottle"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/txt_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Milk"
+            android:fontFamily="@font/jost_bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/img_feeding"
+            app:layout_constraintTop_toTopOf="@+id/img_feeding"
+            android:layout_marginStart="20dp"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/txt_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30cl"
+            android:fontFamily="@font/jost_semi_bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/img_feeding"
+            app:layout_constraintTop_toBottomOf="@+id/txt_label"
+            android:layout_marginStart="20dp"
+            android:textSize="14sp"
+            />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/toggle_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nov 26, 2032 10:30 PM"
+            android:fontFamily="@font/jost_bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/txt_label"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="20dp"
+         />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
