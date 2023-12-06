@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.groupe6.babycare.adapters.ChildAdapter;
 import com.groupe6.babycare.databinding.ActivitySelectChildBinding;
-import com.groupe6.babycare.dtos.ChildDTO;
+import com.groupe6.babycare.dtos.children.ChildDTO;
 import com.groupe6.babycare.holders.GlobalObjectsHolder;
 import com.groupe6.babycare.listeners.OnChildClickListener;
 

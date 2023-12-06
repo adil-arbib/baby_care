@@ -1,6 +1,6 @@
 package com.groupe6.babycare.holders;
 
-import com.groupe6.babycare.dtos.ChildDTO;
+import com.groupe6.babycare.dtos.children.ChildDTO;
 
 public class GlobalObjectsHolder {
 

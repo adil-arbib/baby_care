@@ -32,7 +32,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="7dp"
-                android:src="@drawable/baby_bottle"/>
+                />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -43,7 +43,7 @@
             android:fontFamily="@font/jost_bold"
             android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/img_feeding"
-            app:layout_constraintTop_toTopOf="@+id/img_feeding"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="20dp"
             android:textSize="16sp"
             />
@@ -61,13 +61,6 @@
             android:textSize="14sp"
             />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/toggle_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/txt_date"
             android:layout_width="wrap_content"
@@ -75,11 +68,22 @@
             android:text="Nov 26, 2032 10:30 PM"
             android:fontFamily="@font/jost_bold"
             android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/txt_label"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/txt_label"
+            app:layout_constraintTop_toBottomOf="@+id/txt_quantity"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="20dp"
-         />
+            />
+
+        <CheckBox
+            android:id="@+id/toggle_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:buttonTint="@color/primary"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
 
 
 

@@ -57,5 +57,9 @@
     <string name="height">Height</string>
     <string name="from">From</string>
     <string name="to">To</string>
+    <string name="search">Search..</string>
+    <string name="all">All</string>
+    <string name="done">Done</string>
+    <string name="undone">Undone</string>
 
 </resources>

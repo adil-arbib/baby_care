@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.groupe6.babycare.R;
-import com.groupe6.babycare.dtos.ChildDTO;
+import com.groupe6.babycare.dtos.children.ChildDTO;
 import com.groupe6.babycare.listeners.OnChildClickListener;
 
 import java.util.List;

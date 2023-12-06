@@ -1,4 +1,4 @@
-package com.groupe6.babycare.dtos;
+package com.groupe6.babycare.dtos.children;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -17,9 +17,16 @@ android {
     }
 
     buildTypes {
+
+
+        debug {
+            buildConfigField("String", "BASE_URL", "\"http://localhost:8080/\"")
+        }
+
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "BASE_URL", "\"http://localhost:8080/\"")
         }
     }
     compileOptions {
@@ -29,6 +36,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
 
@@ -42,4 +50,9 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    implementation("com.squareup.retrofit2:retrofit:2.3.0")
+    implementation("com.google.code.gson:gson:2.8.9")
+    implementation("com.squareup.retrofit2:converter-gson:2.3.0")
+    implementation("com.auth0.android:jwtdecode:2.0.0")
 }

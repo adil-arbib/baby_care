@@ -15,7 +15,7 @@ import com.groupe6.babycare.R;
 import com.groupe6.babycare.activities.dialogs.AddChildDialog;
 import com.groupe6.babycare.adapters.ChildAdapter;
 import com.groupe6.babycare.databinding.FragmentChildrenBinding;
-import com.groupe6.babycare.dtos.ChildDTO;
+import com.groupe6.babycare.dtos.children.ChildDTO;
 import com.groupe6.babycare.listeners.OnChildClickListener;
 
 import java.util.ArrayList;
