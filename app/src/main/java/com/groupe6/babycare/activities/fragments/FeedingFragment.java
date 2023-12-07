@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.groupe6.babycare.R;
+import com.groupe6.babycare.activities.dialogs.AddChildDialog;
+import com.groupe6.babycare.activities.dialogs.AddFeedingDialog;
 import com.groupe6.babycare.adapters.ActivityLogAdapter;
 import com.groupe6.babycare.adapters.FoodAdapter;
 import com.groupe6.babycare.databinding.FragmentChildrenBinding;
@@ -44,6 +47,16 @@ public class FeedingFragment extends Fragment implements OnItemClickListener<Foo
                 new FoodAdapter(getStaticFeedingData(),this);
         binding.recyclerFeeding.setAdapter(adapter);
         binding.recyclerFeeding.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        binding.icAdd.setOnClickListener(v -> {
+            AddFeedingDialog dialog = new AddFeedingDialog(getActivity());
+            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+            lp.copyFrom(dialog.getWindow().getAttributes());
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT ;
+            dialog.show();
+            dialog.getWindow().setAttributes(lp);
+        });
     }
 
     private List<FoodDTO> getStaticFeedingData() {

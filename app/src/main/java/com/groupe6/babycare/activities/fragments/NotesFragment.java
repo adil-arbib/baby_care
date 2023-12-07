@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.groupe6.babycare.R;
+import com.groupe6.babycare.activities.dialogs.AddFeedingDialog;
+import com.groupe6.babycare.activities.dialogs.AddNoteDialog;
 import com.groupe6.babycare.adapters.NoteAdapter;
 import com.groupe6.babycare.adapters.SleepAdapter;
 import com.groupe6.babycare.databinding.FragmentNotesBinding;
@@ -46,6 +49,16 @@ public class NotesFragment extends Fragment implements OnItemDeleteListener<Note
                 new NoteAdapter(getStaticNotesData(),this, this);
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        binding.icAdd.setOnClickListener(v -> {
+            AddNoteDialog dialog = new AddNoteDialog(getActivity());
+            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+            lp.copyFrom(dialog.getWindow().getAttributes());
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT ;
+            dialog.show();
+            dialog.getWindow().setAttributes(lp);
+        });
     }
 
     private List<NoteDTO> getStaticNotesData() {

@@ -61,6 +61,15 @@
     <string name="all">All</string>
     <string name="done">Done</string>
     <string name="undone">Undone</string>
+    <string name="label">Label</string>
+    <string name="date">Date</string>
+    <string name="quantity">Quantity</string>
+    <string name="type">Type</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="note">Note</string>
+    <string name="title">Title</string>
+    <string name="content">Content</string>
 
 
     <string-array name="growth_options">

@@ -67,7 +67,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             content = itemView.findViewById(R.id.txt_content);
             date = itemView.findViewById(R.id.txt_date);
             icDelete = itemView.findViewById(R.id.ic_delete);
-
         }
     }
 }

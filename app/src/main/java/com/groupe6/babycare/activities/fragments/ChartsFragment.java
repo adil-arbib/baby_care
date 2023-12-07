@@ -34,7 +34,6 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.groupe6.babycare.R;
-import com.groupe6.babycare.activities.custom.GradientBackgroundDrawable;
 import com.groupe6.babycare.databinding.FragmentChartsBinding;
 
 import java.util.ArrayList;

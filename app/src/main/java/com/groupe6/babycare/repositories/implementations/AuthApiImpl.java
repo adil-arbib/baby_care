@@ -3,6 +3,7 @@ package com.groupe6.babycare.repositories.implementations;
 import android.content.Context;
 
 import com.groupe6.babycare.dtos.auth.LoginRequest;
+import com.groupe6.babycare.dtos.auth.RegisterRequest;
 import com.groupe6.babycare.dtos.auth.TokenResponse;
 import com.groupe6.babycare.dtos.error.ErrorDTO;
 import com.groupe6.babycare.listeners.ResponseListener;
@@ -45,6 +46,26 @@ public class AuthApiImpl {
             public void onFailure(Call<TokenResponse> call, Throwable t) {
             }
         });
+    }
+
+    public void register(RegisterRequest registerRequest, final ResponseListener<TokenResponse> listener) {
+
+        authApi.register(registerRequest).enqueue(new Callback<TokenResponse>() {
+            @Override
+            public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+                if(response.isSuccessful()) listener.onSuccess(response.body());
+                else {
+                    ErrorDTO error = new ErrorDTO(response.message(), response.code());
+                    listener.onError(error);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TokenResponse> call, Throwable t) {
+
+            }
+        });
+
     }
 
 }
