@@ -62,4 +62,11 @@
     <string name="done">Done</string>
     <string name="undone">Undone</string>
 
+
+    <string-array name="growth_options">
+        <item>Weight</item>
+        <item>Height</item>
+    </string-array>
+
+
 </resources>
