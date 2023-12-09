@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+//TODO : Change this class uses with ChildRequestDTO
 public class ChildDTO implements Parcelable {
 
     private String name;
