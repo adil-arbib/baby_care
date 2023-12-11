@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,12 @@ import com.groupe6.babycare.activities.dialogs.AddFeedingDialog;
 import com.groupe6.babycare.adapters.FoodAdapter;
 import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.FragmentFeedingBinding;
+import com.groupe6.babycare.dtos.error.ErrorDTO;
 import com.groupe6.babycare.dtos.feeding.FoodDTO;
+import com.groupe6.babycare.holders.GlobalObjectsHolder;
 import com.groupe6.babycare.listeners.OnItemClickListener;
+import com.groupe6.babycare.listeners.ResponseListener;
+import com.groupe6.babycare.repositories.implementations.ChildApiImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,10 +48,7 @@ public class FeedingFragment extends Fragment implements OnItemClickListener<Foo
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle(R.string.feeding);
 
-        FoodAdapter adapter =
-                new FoodAdapter(getStaticFeedingData(),this);
-        binding.recyclerFeeding.setAdapter(adapter);
-        binding.recyclerFeeding.setLayoutManager(new LinearLayoutManager(getContext()));
+        getNutritions();
 
         binding.icAdd.setOnClickListener(v -> {
             AddFeedingDialog dialog = new AddFeedingDialog(getActivity());
@@ -59,22 +61,23 @@ public class FeedingFragment extends Fragment implements OnItemClickListener<Foo
         });
     }
 
-    private List<FoodDTO> getStaticFeedingData() {
-        return new ArrayList<>(
-                Arrays.asList(
-                        new FoodDTO(1L,"solid","Mashed Banana",1.,"done","Nov 26, 2032 10:30 PM"),
-                        new FoodDTO(1L,"liquid","Cereal",1.,"undone","Nov 26, 2032 10:30 PM"),
-                        new FoodDTO(1L,"breast","Breast feeding",1.,"done","Nov 26, 2032 10:30 PM"),
-                        new FoodDTO(1L,"solid","Avocado Puree",1.,"done","Nov 26, 2032 10:30 PM"),
-                        new FoodDTO(1L,"liquid","Vegetable Soup",1.,"undone","Nov 26, 2032 10:30 PM"),
-                        new FoodDTO(1L,"solid","Applesauce",1.,"done","Nov 26, 2032 10:30 PM"),
-                        new FoodDTO(1L,"solid","Applesauce",1.,"done","Nov 26, 2032 10:30 PM"),
-                        new FoodDTO(1L,"solid","Applesauce",1.,"done","Nov 26, 2032 10:30 PM"),
-                        new FoodDTO(1L,"solid","Applesauce",1.,"done","Nov 26, 2032 10:30 PM"),
-                        new FoodDTO(1L,"solid","Applesauce",1.,"done","Nov 26, 2032 10:30 PM"),
-                        new FoodDTO(1L,"solid","Applesauce",1.,"done","Nov 26, 2032 10:30 PM")
-                )
-        );
+    private void getNutritions() {
+        ChildApiImpl childApi = ChildApiImpl.getInstance(getContext());
+        Log.e("Call", "gnfad");
+        childApi.getChildNutrition(GlobalObjectsHolder.getInstance().getCurrentChild().getId(), new ResponseListener<List<FoodDTO>>() {
+            @Override
+            public void onSuccess(List<FoodDTO> response) {
+                FoodAdapter foodAdapter = new FoodAdapter(response, FeedingFragment.this);
+                binding.recyclerFeeding.setAdapter(foodAdapter);
+                binding.recyclerFeeding.setLayoutManager(new LinearLayoutManager(getContext()));
+
+            }
+
+            @Override
+            public void onError(ErrorDTO error) {
+                Log.e("Error", error.toString());
+            }
+        });
     }
 
     @Override

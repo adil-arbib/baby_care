@@ -2,6 +2,7 @@ package com.groupe6.babycare.repositories.apis;
 
 import com.groupe6.babycare.dtos.children.ChildDTO;
 import com.groupe6.babycare.dtos.children.ChildRequestDTO;
+import com.groupe6.babycare.dtos.feeding.FoodDTO;
 
 import java.util.List;
 
@@ -29,4 +30,7 @@ public interface ChildApi {
 
     @DELETE("/api/v1/children/{id}")
     Call<Void> delete(@Path("id") Long id);
+
+    @GET("/api/v1/children/{id}/nutritions")
+    Call<List<FoodDTO>> getChildNutritions(@Path("id") Long id);
 }

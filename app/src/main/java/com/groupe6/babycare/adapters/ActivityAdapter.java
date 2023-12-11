@@ -43,7 +43,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
         holder.date.setText(activity.getDate());
         holder.note.setText(String.valueOf(activity.getNote()));
         holder.type.setText(activity.getType());
-        holder.checkBox.setChecked(activity.getStatus().equals("done"));
+        holder.checkBox.setChecked(activity.getStatus().equals("COMPLETED"));
         holder.container.setOnClickListener(v -> itemClickListener.onClick(activity));
     }
 

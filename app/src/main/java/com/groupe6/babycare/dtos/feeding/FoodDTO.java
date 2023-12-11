@@ -5,30 +5,33 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 public class FoodDTO implements Parcelable {
 
     private Long id;
 
-    private String type;
+
+    private String nutritionType;
 
     private String label;
 
     private Double quantity;
 
-    private String status;
+    private String reminderState;
 
-    private String date;
-
-    public FoodDTO(Long id, String type, String label, Double quantity, String status, String date) {
-        this.id = id;
-        this.type = type;
-        this.label = label;
-        this.quantity = quantity;
-        this.status = status;
-        this.date = date;
-    }
+    private String reminderDate;
 
     public FoodDTO() {
+    }
+
+    public FoodDTO(Long id, String nutritionType, String label, Double quantity, String reminderState, String reminderDate) {
+        this.id = id;
+        this.nutritionType = nutritionType;
+        this.label = label;
+        this.quantity = quantity;
+        this.reminderState = reminderState;
+        this.reminderDate = reminderDate;
     }
 
     protected FoodDTO(Parcel in) {
@@ -37,15 +40,15 @@ public class FoodDTO implements Parcelable {
         } else {
             id = in.readLong();
         }
-        type = in.readString();
+        nutritionType = in.readString();
         label = in.readString();
         if (in.readByte() == 0) {
             quantity = null;
         } else {
             quantity = in.readDouble();
         }
-        status = in.readString();
-        date = in.readString();
+        reminderState = in.readString();
+        reminderDate = in.readString();
     }
 
     public static final Creator<FoodDTO> CREATOR = new Creator<FoodDTO>() {
@@ -60,6 +63,31 @@ public class FoodDTO implements Parcelable {
         }
     };
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(id);
+        }
+        dest.writeString(nutritionType);
+        dest.writeString(label);
+        if (quantity == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(quantity);
+        }
+        dest.writeString(reminderState);
+        dest.writeString(reminderDate);
+    }
+
     public Long getId() {
         return id;
     }
@@ -68,12 +96,12 @@ public class FoodDTO implements Parcelable {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getNutritionType() {
+        return nutritionType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setNutritionType(String nutritionType) {
+        this.nutritionType = nutritionType;
     }
 
     public String getLabel() {
@@ -92,56 +120,19 @@ public class FoodDTO implements Parcelable {
         this.quantity = quantity;
     }
 
-    public String getStatus() {
-        return status;
+    public String getReminderState() {
+        return reminderState;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setReminderState(String reminderState) {
+        this.reminderState = reminderState;
     }
 
-    public String getDate() {
-        return date;
+    public String getReminderDate() {
+        return reminderDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    @Override
-    public String toString() {
-        return "FoodDTO{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", label='" + label + '\'' +
-                ", quantity=" + quantity +
-                ", status='" + status + '\'' +
-                ", date='" + date + '\'' +
-                '}';
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        if (id == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeLong(id);
-        }
-        dest.writeString(type);
-        dest.writeString(label);
-        if (quantity == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeDouble(quantity);
-        }
-        dest.writeString(status);
-        dest.writeString(date);
+    public void setReminderDate(String reminderDate) {
+        this.reminderDate = reminderDate;
     }
 }

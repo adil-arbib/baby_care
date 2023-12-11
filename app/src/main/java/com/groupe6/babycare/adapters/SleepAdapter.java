@@ -47,7 +47,7 @@ public class SleepAdapter extends RecyclerView.Adapter<SleepAdapter.ViewHolder> 
                 sleep.getType().toLowerCase().equals("nap") ?
                         R.drawable.nap : R.drawable.deep_sleep
         );
-        holder.toggleButton.setChecked(sleep.getStatus().equals("done"));
+        holder.toggleButton.setChecked(sleep.getStatus().equals("COMPLETED"));
         holder.container.setOnClickListener(v -> itemClickListener.onClick(sleep));
     }
 

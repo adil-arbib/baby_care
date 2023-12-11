@@ -6,6 +6,7 @@ import android.content.Context;
 import com.groupe6.babycare.dtos.children.ChildDTO;
 import com.groupe6.babycare.dtos.children.ChildRequestDTO;
 import com.groupe6.babycare.dtos.error.ErrorDTO;
+import com.groupe6.babycare.dtos.feeding.FoodDTO;
 import com.groupe6.babycare.listeners.ResponseListener;
 import com.groupe6.babycare.repositories.ApiClient;
 import com.groupe6.babycare.repositories.apis.ChildApi;
@@ -115,6 +116,25 @@ public class ChildApiImpl {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 // Handle failure
+            }
+        });
+    }
+
+
+    public void getChildNutrition(Long childId, final ResponseListener<List<FoodDTO>> listener) {
+        childApi.getChildNutritions(childId).enqueue(new Callback<List<FoodDTO>>() {
+            @Override
+            public void onResponse(Call<List<FoodDTO>> call, Response<List<FoodDTO>> response) {
+                if(response.isSuccessful()) listener.onSuccess(response.body());
+                else {
+                    ErrorDTO errorDTO = new ErrorDTO(response.message(), response.code());
+                    listener.onError(errorDTO);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FoodDTO>> call, Throwable t) {
+
             }
         });
     }

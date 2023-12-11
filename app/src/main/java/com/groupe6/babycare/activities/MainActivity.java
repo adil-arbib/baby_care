@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     R.id.fragment_container, new ChartsFragment()
             ).commit();
         } else {
-            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
        drawerLayout.closeDrawer(GravityCompat.START);
         return true;

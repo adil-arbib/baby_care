@@ -1,5 +1,6 @@
 package com.groupe6.babycare.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,10 +43,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull FoodAdapter.ViewHolder holder, int position) {
         FoodDTO food = foods.get(position);
         holder.label.setText(food.getLabel());
-        holder.date.setText(food.getDate());
+        holder.date.setText(food.getReminderDate());
         holder.quantity.setText(String.valueOf(food.getQuantity()));
-        holder.imgFeedingType.setBackgroundResource(getImgResource(food.getType()));
-        holder.toggleButton.setChecked(food.getStatus().equals("done"));
+        holder.imgFeedingType.setBackgroundResource(getImgResource(food.getReminderState()));
+        holder.toggleButton.setChecked(food.getReminderState().equals("COMPLETED"));
         holder.container.setOnClickListener(v -> itemClickListener.onClick(food));
     }
 

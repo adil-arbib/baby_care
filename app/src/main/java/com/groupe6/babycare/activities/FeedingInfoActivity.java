@@ -36,10 +36,10 @@ public class FeedingInfoActivity extends AppCompatActivity {
 
     private void displayData() {
         binding.inputLabel.setText(food.getLabel());
-        binding.inputDate.setText(food.getDate());
-        binding.inputType.setText(food.getType());
+        binding.inputDate.setText(food.getReminderDate());
+        binding.inputType.setText(food.getNutritionType());
         binding.inputQuantity.setText(food.getQuantity()+"");
-        binding.toggleButton.setChecked(food.getStatus().toLowerCase().equals("done"));
+        binding.toggleButton.setChecked(food.getReminderState().toLowerCase().equals("done"));
     }
 
     public void cancelChanges() {
