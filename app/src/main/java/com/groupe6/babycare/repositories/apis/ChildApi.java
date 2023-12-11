@@ -18,7 +18,7 @@ public interface ChildApi {
     @GET("/api/v1/children")
     Call<List<ChildDTO>> getAll();
 
-    @POST("/api/v1/children")
+    @POST("/api/v1/children/add")
     Call<ChildDTO> add(@Body ChildDTO childDTO);
 
     @PUT("/api/v1/children/{id}/update")

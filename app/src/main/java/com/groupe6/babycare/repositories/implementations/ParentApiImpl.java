@@ -50,4 +50,23 @@ public class ParentApiImpl {
         });
     }
 
+
+    public void addChild(ChildDTO child, Long parentId, final ResponseListener<Void> responseListener){
+        parentApi.addChild(child,parentId).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()) responseListener.onSuccess(response.body());
+                else {
+                    ErrorDTO errorDTO = new ErrorDTO(response.message(), response.code());
+                    responseListener.onError(errorDTO);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+    }
+
 }
