@@ -9,9 +9,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.groupe6.babycare.R;
 import com.groupe6.babycare.dtos.children.ChildDTO;
+import com.groupe6.babycare.holders.GlobalObjectsHolder;
 import com.groupe6.babycare.listeners.OnChildClickListener;
+import com.groupe6.babycare.listeners.SelectChildListener;
 
 import java.util.List;
 
@@ -22,10 +26,21 @@ public class ChildAdapter extends BaseAdapter {
 
     private OnChildClickListener childOnClickListener;
 
+    private View previousView = null;
+
+    private SelectChildListener selectChildListener;
+
     public ChildAdapter(Context context, List<ChildDTO> children, final OnChildClickListener childOnClickListener) {
         this.children = children;
         this.context = context;
         this.childOnClickListener = childOnClickListener;
+    }
+
+    public ChildAdapter(Context context, List<ChildDTO> children, OnChildClickListener childOnClickListener, SelectChildListener selectChildListener) {
+        this.children = children;
+        this.context = context;
+        this.childOnClickListener = childOnClickListener;
+        this.selectChildListener = selectChildListener;
     }
 
     @Override
@@ -52,6 +67,7 @@ public class ChildAdapter extends BaseAdapter {
         ImageView childPic = convertView.findViewById(R.id.img_gender);
         TextView childName = convertView.findViewById(R.id.txt_child_name);
         LinearLayout childItem = convertView.findViewById(R.id.child_item);
+        View dottedView = convertView.findViewById(R.id.dotted);
         ChildDTO child = children.get(position);
         childPic.setBackgroundResource(
                 child.getGender().equalsIgnoreCase("MALE")
@@ -59,7 +75,22 @@ public class ChildAdapter extends BaseAdapter {
         );
         childName.setText(child.getFirstName());
 
+        childItem.setOnLongClickListener(v -> {
+            System.out.println("Long press");
+            selectChildListener.onSelectChild(child, dottedView, previousView);
+            previousView = dottedView;
+            return false;
+        });
+
         childItem.setOnClickListener(v -> childOnClickListener.onChildClick(child));
+
+
+
+
+        if(selectChildListener != null && GlobalObjectsHolder.getInstance().getCurrentChild().getId() == child.getId()){
+            previousView = dottedView;
+            dottedView.setVisibility(View.VISIBLE);
+        }
 
         return convertView;
     }

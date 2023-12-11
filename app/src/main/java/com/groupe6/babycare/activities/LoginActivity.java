@@ -52,7 +52,6 @@ public class LoginActivity extends AppCompatActivity {
                 public void onSuccess(TokenResponse response) {
                     binding.progressBar.setVisibility(View.GONE);
                     binding.btnSignIn.setEnabled(true);
-                    Log.i("Token", "token is "+response.getTokon());
                     TokenManager tokenManager = new TokenManager(getApplicationContext());
                     tokenManager.saveToken(response.getTokon());
                     tokenManager.storeCredentials(response.getTokon());

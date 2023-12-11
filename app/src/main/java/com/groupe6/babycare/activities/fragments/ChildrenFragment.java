@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.groupe6.babycare.R;
 import com.groupe6.babycare.activities.ChildInfoActivity;
@@ -21,8 +22,10 @@ import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.FragmentChildrenBinding;
 import com.groupe6.babycare.dtos.children.ChildDTO;
 import com.groupe6.babycare.dtos.error.ErrorDTO;
+import com.groupe6.babycare.holders.GlobalObjectsHolder;
 import com.groupe6.babycare.listeners.OnChildClickListener;
 import com.groupe6.babycare.listeners.ResponseListener;
+import com.groupe6.babycare.listeners.SelectChildListener;
 import com.groupe6.babycare.repositories.implementations.ParentApiImpl;
 import com.groupe6.babycare.utils.SharedPreferencesUtils;
 
@@ -31,7 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class ChildrenFragment extends Fragment implements OnChildClickListener {
+public class ChildrenFragment extends Fragment implements OnChildClickListener, SelectChildListener {
 
     private FragmentChildrenBinding binding;
 
@@ -69,7 +72,7 @@ public class ChildrenFragment extends Fragment implements OnChildClickListener {
         parentApi.getChildren(Long.parseLong(sharedPreferencesUtils.getValue("parentId")), new ResponseListener<List<ChildDTO>>() {
             @Override
             public void onSuccess(List<ChildDTO> response) {
-                ChildAdapter childAdapter = new ChildAdapter(getContext(), response, ChildrenFragment.this);
+                ChildAdapter childAdapter = new ChildAdapter(getContext(), response, ChildrenFragment.this,ChildrenFragment.this);
                 binding.grid.setAdapter(childAdapter);
                 binding.progressBar.setVisibility(View.GONE);
             }
@@ -86,5 +89,15 @@ public class ChildrenFragment extends Fragment implements OnChildClickListener {
         Intent intent = new Intent(getActivity(), ChildInfoActivity.class);
         intent.putExtra(GlobalKeys.CHILD_KEY, child);
         startActivity(intent);
+    }
+
+    @Override
+    public void onSelectChild(ChildDTO child, View viewToSelect, View previousView) {
+        GlobalObjectsHolder.getInstance().setCurrentChild(child);
+        viewToSelect.setVisibility(View.VISIBLE);
+        Toast.makeText(getContext(), child.getFirstName()+" is the current child", Toast.LENGTH_SHORT).show();
+        if(previousView != null) {
+            previousView.setVisibility(View.GONE);
+        }
     }
 }

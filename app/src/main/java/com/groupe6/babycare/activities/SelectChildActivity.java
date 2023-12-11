@@ -58,6 +58,7 @@ public class SelectChildActivity extends AppCompatActivity implements OnChildCli
 
     @Override
     public void onChildClick(ChildDTO child) {
+        System.out.println(child);
         GlobalObjectsHolder.getInstance().setCurrentChild(child);
         startActivity(new Intent(SelectChildActivity.this, MainActivity.class));
         finish();
