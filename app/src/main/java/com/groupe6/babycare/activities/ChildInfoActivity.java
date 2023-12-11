@@ -8,6 +8,7 @@ import android.view.View;
 import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.ActivityChildInfoBinding;
 import com.groupe6.babycare.dtos.children.ChildDTO;
+import com.groupe6.babycare.utils.TimeUtils;
 
 public class ChildInfoActivity extends AppCompatActivity {
 
@@ -35,10 +36,10 @@ public class ChildInfoActivity extends AppCompatActivity {
 
     private void displayData() {
         binding.inputName.setText(child.getFirstName());
-        binding.inputDate.setText(child.getBirthDate());
+        binding.inputDate.setText(TimeUtils.formatFromSqlDateToRegular(child.getBirthDate()));
         binding.inputWeight.setText(child.getWeight()+"");
         binding.inputHeight.setText(child.getHeight()+"");
-        boolean isBoy = child.getGender().toLowerCase().equals("boy");
+        boolean isBoy = child.getGender().toLowerCase().equals("male");
         System.out.println(isBoy);
         binding.radioBoy.setChecked(isBoy);
         binding.radioGirl.setChecked(!isBoy);

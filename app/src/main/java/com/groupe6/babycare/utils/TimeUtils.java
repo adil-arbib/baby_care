@@ -1,6 +1,9 @@
 package com.groupe6.babycare.utils;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -31,6 +34,30 @@ public class TimeUtils {
 
     public String[] splitDate(String date) {
         return date.split(" ");
+    }
+
+
+    public static String formatFromSqlDateToRegular(String sqlDate) {
+        try {
+            OffsetDateTime offsetDateTime = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                offsetDateTime = OffsetDateTime.parse(sqlDate, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+            }
+
+            DateTimeFormatter outputFormatter = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                outputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            }
+            String outputDate = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                outputDate = offsetDateTime.format(outputFormatter);
+            }
+
+            return outputDate;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

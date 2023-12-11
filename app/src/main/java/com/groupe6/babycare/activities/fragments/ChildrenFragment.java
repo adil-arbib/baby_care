@@ -14,12 +14,17 @@ import android.view.WindowManager;
 
 import com.groupe6.babycare.R;
 import com.groupe6.babycare.activities.ChildInfoActivity;
+import com.groupe6.babycare.activities.SelectChildActivity;
 import com.groupe6.babycare.activities.dialogs.AddChildDialog;
 import com.groupe6.babycare.adapters.ChildAdapter;
 import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.FragmentChildrenBinding;
 import com.groupe6.babycare.dtos.children.ChildDTO;
+import com.groupe6.babycare.dtos.error.ErrorDTO;
 import com.groupe6.babycare.listeners.OnChildClickListener;
+import com.groupe6.babycare.listeners.ResponseListener;
+import com.groupe6.babycare.repositories.implementations.ParentApiImpl;
+import com.groupe6.babycare.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,9 +47,8 @@ public class ChildrenFragment extends Fragment implements OnChildClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle(R.string.children);
-        // static data
-        ChildAdapter childAdapter = new ChildAdapter(getActivity(), getStaticData(), this);
-        binding.grid.setAdapter(childAdapter);
+
+        getChildren();
 
         //add click listener on add child button
         binding.icAdd.setOnClickListener(v -> {
@@ -58,19 +62,29 @@ public class ChildrenFragment extends Fragment implements OnChildClickListener {
         });
     }
 
-    public List<ChildDTO> getStaticData() {
-        return new ArrayList<>(Arrays.asList(
-                new ChildDTO(1L,"Adil","boy")  ,
-                new ChildDTO(1L,"Aissam","boy")  ,
-                new ChildDTO(1L,"Salma","girl")
-        ));
+    public void getChildren() {
+        binding.progressBar.setVisibility(View.VISIBLE);
+        SharedPreferencesUtils sharedPreferencesUtils = SharedPreferencesUtils.getInstance(getContext());
+        ParentApiImpl parentApi = ParentApiImpl.getInstance(getContext());
+        parentApi.getChildren(Long.parseLong(sharedPreferencesUtils.getValue("parentId")), new ResponseListener<List<ChildDTO>>() {
+            @Override
+            public void onSuccess(List<ChildDTO> response) {
+                ChildAdapter childAdapter = new ChildAdapter(getContext(), response, ChildrenFragment.this);
+                binding.grid.setAdapter(childAdapter);
+                binding.progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onError(ErrorDTO error) {
+
+            }
+        });
     }
 
     @Override
     public void onChildClick(ChildDTO child) {
         Intent intent = new Intent(getActivity(), ChildInfoActivity.class);
-        ChildDTO childDTO = new ChildDTO(1L, "Adil","Arbib",4,"30/05/2020","boy",10,100);
-        intent.putExtra(GlobalKeys.CHILD_KEY, childDTO);
+        intent.putExtra(GlobalKeys.CHILD_KEY, child);
         startActivity(intent);
     }
 }

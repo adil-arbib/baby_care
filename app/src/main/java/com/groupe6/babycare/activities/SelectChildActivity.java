@@ -33,8 +33,6 @@ public class SelectChildActivity extends AppCompatActivity implements OnChildCli
         View view = binding.getRoot();
         setContentView(view);
 
-
-        // static data
         getChildren();
     }
 
