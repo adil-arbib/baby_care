@@ -1,9 +1,15 @@
 package com.groupe6.babycare.utils;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -52,6 +58,24 @@ public class TimeUtils {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 outputDate = offsetDateTime.format(outputFormatter);
             }
+
+            return outputDate;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String convertToISOFormat(String inputDate) {
+        try {
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate localDate = LocalDate.parse(inputDate, inputFormatter);
+
+            OffsetDateTime offsetDateTime = localDate.atStartOfDay().atOffset(ZoneOffset.UTC);
+
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+            String outputDate = offsetDateTime.format(outputFormatter);
 
             return outputDate;
         } catch (Exception e) {

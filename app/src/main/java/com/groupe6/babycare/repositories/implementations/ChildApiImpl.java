@@ -3,6 +3,7 @@ package com.groupe6.babycare.repositories.implementations;
 
 import android.content.Context;
 
+import com.groupe6.babycare.dtos.children.ChildDTO;
 import com.groupe6.babycare.dtos.children.ChildRequestDTO;
 import com.groupe6.babycare.dtos.error.ErrorDTO;
 import com.groupe6.babycare.listeners.ResponseListener;
@@ -29,10 +30,10 @@ public class ChildApiImpl {
         return childApiImpl;
     }
 
-    public void getAllChildren(final ResponseListener<List<ChildRequestDTO>> listener) {
-        childApi.getAll().enqueue(new Callback<List<ChildRequestDTO>>() {
+    public void getAllChildren(final ResponseListener<List<ChildDTO>> listener) {
+        childApi.getAll().enqueue(new Callback<List<ChildDTO>>() {
             @Override
-            public void onResponse(Call<List<ChildRequestDTO>> call, Response<List<ChildRequestDTO>> response) {
+            public void onResponse(Call<List<ChildDTO>> call, Response<List<ChildDTO>> response) {
                 if(response.isSuccessful()) listener.onSuccess(response.body());
                 else {
                     ErrorDTO errorDTO = new ErrorDTO(response.message(), response.code());
@@ -41,15 +42,15 @@ public class ChildApiImpl {
             }
 
             @Override
-            public void onFailure(Call<List<ChildRequestDTO>> call, Throwable t) {
+            public void onFailure(Call<List<ChildDTO>> call, Throwable t) {
             }
         });
     }
 
-    public void addChild(ChildRequestDTO childRequestDTO, final ResponseListener<ChildRequestDTO> listener) {
-        childApi.add(childRequestDTO).enqueue(new Callback<ChildRequestDTO>() {
+    public void addChild(ChildDTO childRequestDTO, final ResponseListener<ChildDTO> listener) {
+        childApi.add(childRequestDTO).enqueue(new Callback<ChildDTO>() {
             @Override
-            public void onResponse(Call<ChildRequestDTO> call, Response<ChildRequestDTO> response) {
+            public void onResponse(Call<ChildDTO> call, Response<ChildDTO> response) {
                 if(response.isSuccessful()) listener.onSuccess(response.body());
                 else {
                     ErrorDTO errorDTO = new ErrorDTO(response.message(), response.code());
@@ -58,16 +59,16 @@ public class ChildApiImpl {
             }
 
             @Override
-            public void onFailure(Call<ChildRequestDTO> call, Throwable t) {
+            public void onFailure(Call<ChildDTO> call, Throwable t) {
                 // Handle failure
             }
         });
     }
 
-    public void updateChild(ChildRequestDTO childRequestDTO, Long id, final ResponseListener<ChildRequestDTO> listener) {
-        childApi.update(childRequestDTO, id).enqueue(new Callback<ChildRequestDTO>() {
+    public void updateChild(ChildDTO childRequestDTO, Long id, final ResponseListener<ChildDTO> listener) {
+        childApi.update(childRequestDTO, id).enqueue(new Callback<ChildDTO>() {
             @Override
-            public void onResponse(Call<ChildRequestDTO> call, Response<ChildRequestDTO> response) {
+            public void onResponse(Call<ChildDTO> call, Response<ChildDTO> response) {
                 if(response.isSuccessful()) listener.onSuccess(response.body());
                 else {
                     ErrorDTO errorDTO = new ErrorDTO(response.message(), response.code());
@@ -76,16 +77,16 @@ public class ChildApiImpl {
             }
 
             @Override
-            public void onFailure(Call<ChildRequestDTO> call, Throwable t) {
+            public void onFailure(Call<ChildDTO> call, Throwable t) {
                 // Handle failure
             }
         });
     }
 
-    public void getChildById(Long id, final ResponseListener<ChildRequestDTO> listener) {
-        childApi.getChildById(id).enqueue(new Callback<ChildRequestDTO>() {
+    public void getChildById(Long id, final ResponseListener<ChildDTO> listener) {
+        childApi.getChildById(id).enqueue(new Callback<ChildDTO>() {
             @Override
-            public void onResponse(Call<ChildRequestDTO> call, Response<ChildRequestDTO> response) {
+            public void onResponse(Call<ChildDTO> call, Response<ChildDTO> response) {
                 if(response.isSuccessful()) listener.onSuccess(response.body());
                 else {
                     ErrorDTO errorDTO = new ErrorDTO(response.message(), response.code());
@@ -94,7 +95,7 @@ public class ChildApiImpl {
             }
 
             @Override
-            public void onFailure(Call<ChildRequestDTO> call, Throwable t) {
+            public void onFailure(Call<ChildDTO> call, Throwable t) {
                 // Handle failure
             }
         });

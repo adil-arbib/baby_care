@@ -18,6 +18,9 @@ public class ChildDTO implements Parcelable {
     private double weight;
     private double height;
 
+    public ChildDTO() {
+    }
+
     public ChildDTO(Long id, String firstName, String gender) {
         this.id = id;
         this.firstName = firstName;
@@ -147,4 +150,7 @@ public class ChildDTO implements Parcelable {
         dest.writeDouble(weight);
         dest.writeDouble(height);
     }
+
+
+
 }
