@@ -2,24 +2,24 @@ package com.groupe6.babycare.dtos.auth;
 
 public class TokenResponse {
 
-    private String accessToken;
+    private String token;
 
-    public TokenResponse(String accessToken) {
-        this.accessToken = accessToken;
+    public TokenResponse(String tokon) {
+        this.token = tokon;
     }
 
-    public String getAccessToken() {
-        return accessToken;
+    public String getTokon() {
+        return token;
     }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public void setTokon(String tokon) {
+        this.token = tokon;
     }
 
     @Override
     public String toString() {
         return "TokenResponse{" +
-                "accessToken='" + accessToken + '\'' +
+                "tokon='" + token + '\'' +
                 '}';
     }
 }

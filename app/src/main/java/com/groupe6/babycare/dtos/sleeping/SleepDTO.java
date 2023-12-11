@@ -1,6 +1,11 @@
 package com.groupe6.babycare.dtos.sleeping;
 
-public class SleepDTO {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class SleepDTO implements Parcelable {
 
     private Long id;
     private String type;
@@ -20,6 +25,32 @@ public class SleepDTO {
         this.endDate = endDate;
         this.awakenings = awakenings;
     }
+
+    protected SleepDTO(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readLong();
+        }
+        type = in.readString();
+        status = in.readString();
+        date = in.readString();
+        startDate = in.readString();
+        endDate = in.readString();
+        awakenings = in.readInt();
+    }
+
+    public static final Creator<SleepDTO> CREATOR = new Creator<SleepDTO>() {
+        @Override
+        public SleepDTO createFromParcel(Parcel in) {
+            return new SleepDTO(in);
+        }
+
+        @Override
+        public SleepDTO[] newArray(int size) {
+            return new SleepDTO[size];
+        }
+    };
 
     public Long getId() {
         return id;
@@ -88,5 +119,26 @@ public class SleepDTO {
                 ", endDate='" + endDate + '\'' +
                 ", awakenings=" + awakenings +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(id);
+        }
+        dest.writeString(type);
+        dest.writeString(status);
+        dest.writeString(date);
+        dest.writeString(startDate);
+        dest.writeString(endDate);
+        dest.writeInt(awakenings);
     }
 }

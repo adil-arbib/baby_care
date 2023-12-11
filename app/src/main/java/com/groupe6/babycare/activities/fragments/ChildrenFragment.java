@@ -1,5 +1,6 @@
 package com.groupe6.babycare.activities.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,8 +13,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.groupe6.babycare.R;
+import com.groupe6.babycare.activities.ChildInfoActivity;
 import com.groupe6.babycare.activities.dialogs.AddChildDialog;
 import com.groupe6.babycare.adapters.ChildAdapter;
+import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.FragmentChildrenBinding;
 import com.groupe6.babycare.dtos.children.ChildDTO;
 import com.groupe6.babycare.listeners.OnChildClickListener;
@@ -57,14 +60,17 @@ public class ChildrenFragment extends Fragment implements OnChildClickListener {
 
     public List<ChildDTO> getStaticData() {
         return new ArrayList<>(Arrays.asList(
-                new ChildDTO("Adil","boy")  ,
-                new ChildDTO("Aissam","boy")  ,
-                new ChildDTO("Salma","girl")
+                new ChildDTO(1L,"Adil","boy")  ,
+                new ChildDTO(1L,"Aissam","boy")  ,
+                new ChildDTO(1L,"Salma","girl")
         ));
     }
 
     @Override
     public void onChildClick(ChildDTO child) {
-        System.out.println(child);
+        Intent intent = new Intent(getActivity(), ChildInfoActivity.class);
+        ChildDTO childDTO = new ChildDTO(1L, "Adil","Arbib",4,"30/05/2020","boy",10,100);
+        intent.putExtra(GlobalKeys.CHILD_KEY, childDTO);
+        startActivity(intent);
     }
 }

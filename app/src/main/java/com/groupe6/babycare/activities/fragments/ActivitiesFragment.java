@@ -1,5 +1,6 @@
 package com.groupe6.babycare.activities.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +14,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.groupe6.babycare.R;
+import com.groupe6.babycare.activities.ActivityInfoActivity;
+import com.groupe6.babycare.activities.FeedingInfoActivity;
 import com.groupe6.babycare.activities.MainActivity;
 import com.groupe6.babycare.adapters.ActivityAdapter;
 import com.groupe6.babycare.adapters.SleepAdapter;
+import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.FragmentActivitiesBinding;
 import com.groupe6.babycare.databinding.FragmentSleepingBinding;
 import com.groupe6.babycare.dtos.activities.ActivityDTO;
@@ -70,5 +74,8 @@ public class ActivitiesFragment extends Fragment implements OnItemClickListener<
     @Override
     public void onClick(ActivityDTO item) {
         System.out.println(item);
+        Intent intent = new Intent(getActivity(), ActivityInfoActivity.class);
+        intent.putExtra(GlobalKeys.ACTIVITY_KEY, item);
+        startActivity(intent);
     }
 }

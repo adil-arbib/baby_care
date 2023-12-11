@@ -20,13 +20,13 @@ android {
 
 
         debug {
-            buildConfigField("String", "BASE_URL", "\"http://localhost:8080/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.49.1:8080/\"")
         }
 
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            buildConfigField("String", "BASE_URL", "\"http://localhost:8080/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.49.1:8080/\"")
         }
     }
     compileOptions {

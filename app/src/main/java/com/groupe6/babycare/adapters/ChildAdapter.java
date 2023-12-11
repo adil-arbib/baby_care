@@ -54,10 +54,10 @@ public class ChildAdapter extends BaseAdapter {
         LinearLayout childItem = convertView.findViewById(R.id.child_item);
         ChildDTO child = children.get(position);
         childPic.setBackgroundResource(
-                child.getGender().equalsIgnoreCase("boy")
+                child.getGender().equalsIgnoreCase("MALE")
                 ? R.drawable.boy : R.drawable.girl
         );
-        childName.setText(child.getName());
+        childName.setText(child.getFirstName());
 
         childItem.setOnClickListener(v -> childOnClickListener.onChildClick(child));
 

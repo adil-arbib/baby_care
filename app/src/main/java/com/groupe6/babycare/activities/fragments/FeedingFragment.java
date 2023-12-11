@@ -1,5 +1,6 @@
 package com.groupe6.babycare.activities.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,11 +14,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.groupe6.babycare.R;
-import com.groupe6.babycare.activities.dialogs.AddChildDialog;
+import com.groupe6.babycare.activities.FeedingInfoActivity;
 import com.groupe6.babycare.activities.dialogs.AddFeedingDialog;
-import com.groupe6.babycare.adapters.ActivityLogAdapter;
 import com.groupe6.babycare.adapters.FoodAdapter;
-import com.groupe6.babycare.databinding.FragmentChildrenBinding;
+import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.FragmentFeedingBinding;
 import com.groupe6.babycare.dtos.feeding.FoodDTO;
 import com.groupe6.babycare.listeners.OnItemClickListener;
@@ -80,5 +80,8 @@ public class FeedingFragment extends Fragment implements OnItemClickListener<Foo
     @Override
     public void onClick(FoodDTO item) {
         System.out.println(item);
+        Intent intent = new Intent(getActivity(), FeedingInfoActivity.class);
+        intent.putExtra(GlobalKeys.FEEDING_KEY, item);
+        startActivity(intent);
     }
 }

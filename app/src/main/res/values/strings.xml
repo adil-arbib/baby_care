@@ -70,6 +70,8 @@
     <string name="note">Note</string>
     <string name="title">Title</string>
     <string name="content">Content</string>
+    <string name="save">Save</string>
+    <string name="awakenings">Awakenings</string>
 
 
     <string-array name="growth_options">

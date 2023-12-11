@@ -1,6 +1,11 @@
 package com.groupe6.babycare.dtos.activities;
 
-public class ActivityDTO {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class ActivityDTO implements Parcelable {
 
     private Long id;
     private String type;
@@ -18,6 +23,30 @@ public class ActivityDTO {
         this.status = status;
         this.note = note;
     }
+
+    protected ActivityDTO(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readLong();
+        }
+        type = in.readString();
+        date = in.readString();
+        status = in.readString();
+        note = in.readString();
+    }
+
+    public static final Creator<ActivityDTO> CREATOR = new Creator<ActivityDTO>() {
+        @Override
+        public ActivityDTO createFromParcel(Parcel in) {
+            return new ActivityDTO(in);
+        }
+
+        @Override
+        public ActivityDTO[] newArray(int size) {
+            return new ActivityDTO[size];
+        }
+    };
 
     public Long getId() {
         return id;
@@ -68,5 +97,24 @@ public class ActivityDTO {
                 ", status='" + status + '\'' +
                 ", note='" + note + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(id);
+        }
+        dest.writeString(type);
+        dest.writeString(date);
+        dest.writeString(status);
+        dest.writeString(note);
     }
 }

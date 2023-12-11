@@ -9,8 +9,13 @@ import android.view.View;
 import com.groupe6.babycare.adapters.ChildAdapter;
 import com.groupe6.babycare.databinding.ActivitySelectChildBinding;
 import com.groupe6.babycare.dtos.children.ChildDTO;
+import com.groupe6.babycare.dtos.error.ErrorDTO;
 import com.groupe6.babycare.holders.GlobalObjectsHolder;
 import com.groupe6.babycare.listeners.OnChildClickListener;
+import com.groupe6.babycare.listeners.ResponseListener;
+import com.groupe6.babycare.repositories.implementations.ParentApiImpl;
+import com.groupe6.babycare.utils.SharedPreferencesUtils;
+import com.groupe6.babycare.utils.TokenManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,18 +35,27 @@ public class SelectChildActivity extends AppCompatActivity implements OnChildCli
 
 
         // static data
-        ChildAdapter childAdapter = new ChildAdapter(this, getStaticData(), this);
-        binding.grid.setAdapter(childAdapter);
+        getChildren();
     }
 
 
-    public List<ChildDTO> getStaticData() {
-        return new ArrayList<>(Arrays.asList(
-              new ChildDTO("Adil","boy")  ,
-              new ChildDTO("Safae","girl")  ,
-              new ChildDTO("Kaoutar","girl")  ,
-              new ChildDTO("Mohamed","boy")
-        ));
+    public void getChildren() {
+        binding.progressBar.setVisibility(View.VISIBLE);
+        SharedPreferencesUtils sharedPreferencesUtils = SharedPreferencesUtils.getInstance(getApplicationContext());
+        ParentApiImpl parentApi = ParentApiImpl.getInstance(getApplicationContext());
+        parentApi.getChildren(Long.parseLong(sharedPreferencesUtils.getValue("parentId")), new ResponseListener<List<ChildDTO>>() {
+            @Override
+            public void onSuccess(List<ChildDTO> response) {
+                ChildAdapter childAdapter = new ChildAdapter(SelectChildActivity.this, response, SelectChildActivity.this);
+                binding.grid.setAdapter(childAdapter);
+                binding.progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onError(ErrorDTO error) {
+
+            }
+        });
     }
 
     @Override

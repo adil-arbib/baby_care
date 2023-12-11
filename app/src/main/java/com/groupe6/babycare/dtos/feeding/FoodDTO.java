@@ -1,6 +1,11 @@
 package com.groupe6.babycare.dtos.feeding;
 
-public class FoodDTO {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class FoodDTO implements Parcelable {
 
     private Long id;
 
@@ -25,6 +30,35 @@ public class FoodDTO {
 
     public FoodDTO() {
     }
+
+    protected FoodDTO(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readLong();
+        }
+        type = in.readString();
+        label = in.readString();
+        if (in.readByte() == 0) {
+            quantity = null;
+        } else {
+            quantity = in.readDouble();
+        }
+        status = in.readString();
+        date = in.readString();
+    }
+
+    public static final Creator<FoodDTO> CREATOR = new Creator<FoodDTO>() {
+        @Override
+        public FoodDTO createFromParcel(Parcel in) {
+            return new FoodDTO(in);
+        }
+
+        @Override
+        public FoodDTO[] newArray(int size) {
+            return new FoodDTO[size];
+        }
+    };
 
     public Long getId() {
         return id;
@@ -84,5 +118,30 @@ public class FoodDTO {
                 ", status='" + status + '\'' +
                 ", date='" + date + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(id);
+        }
+        dest.writeString(type);
+        dest.writeString(label);
+        if (quantity == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(quantity);
+        }
+        dest.writeString(status);
+        dest.writeString(date);
     }
 }
