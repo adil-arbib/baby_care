@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +22,13 @@ import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.ActivitySleepInfoBinding;
 import com.groupe6.babycare.databinding.FragmentFeedingBinding;
 import com.groupe6.babycare.databinding.FragmentSleepingBinding;
+import com.groupe6.babycare.dtos.error.ErrorDTO;
 import com.groupe6.babycare.dtos.feeding.FoodDTO;
 import com.groupe6.babycare.dtos.sleeping.SleepDTO;
+import com.groupe6.babycare.holders.GlobalObjectsHolder;
 import com.groupe6.babycare.listeners.OnItemClickListener;
+import com.groupe6.babycare.listeners.ResponseListener;
+import com.groupe6.babycare.repositories.implementations.ChildApiImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,27 +50,30 @@ public class SleepingFragment extends Fragment implements OnItemClickListener<Sl
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle(R.string.sleeping);
+        getSleepingData();
 
-        SleepAdapter adapter =
-                new SleepAdapter(getStaticSleepingData(),this);
-        binding.recyclerView.setAdapter(adapter);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
 
     }
 
-    private List<SleepDTO> getStaticSleepingData() {
-        return new ArrayList<>(
-                Arrays.asList(
-                        new SleepDTO(1L,"nap","done","10:00 PM Nov 25, 2032","10:00 PM Nov 25, 2032","10:30 PM",0),
-                        new SleepDTO(1L,"deep","done","10:00 PM Nov 25, 2032","10:00 PM Nov 25, 2032","10:30 PM",0),
-                        new SleepDTO(1L,"nap","undone","10:00 PM Nov 25, 2032","10:00 PM Nov 25, 2032","0:30 PM",0),
-                        new SleepDTO(1L,"nap","done","10:00 PM Nov 25, 2032","10:00 PM Nov 25, 2032","10:30 PM",0),
-                        new SleepDTO(1L,"deep","undone","10:00 PM Nov 25, 2032","10:00 PM Nov 25, 2032","10:30 PM",0),
-                        new SleepDTO(1L,"deep","done","10:00 PM Nov 25, 2032","10:00 PM Nov 25, 2032","10:30 PM",0),
-                        new SleepDTO(1L,"nap","undone","10:00 PM Nov 25, 2032","10:00 PM Nov 25, 2032","10:30 PM",0),
-                        new SleepDTO(1L,"deep","done","10:00 PM Nov 25, 2032","10:00 PM Nov 25, 2032","10:30 PM",0)
-                )
-        );
+    private void getSleepingData() {
+        ChildApiImpl childApi = ChildApiImpl.getInstance(getContext());
+
+        childApi.getChildSleep(GlobalObjectsHolder.getInstance().getCurrentChild().getId(),
+                new ResponseListener<List<SleepDTO>>() {
+            @Override
+            public void onSuccess(List<SleepDTO> response) {
+                SleepAdapter sleepAdapter = new SleepAdapter(response, SleepingFragment.this);
+                binding.recyclerView.setAdapter(sleepAdapter);
+                binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+            }
+
+            @Override
+            public void onError(ErrorDTO error) {
+                Log.e("Error", error.toString());
+            }
+        });
     }
 
     @Override

@@ -41,13 +41,14 @@ public class SleepAdapter extends RecyclerView.Adapter<SleepAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull SleepAdapter.ViewHolder holder, int position) {
         SleepDTO sleep = sleepList.get(position);
+        System.out.println(sleep);
         holder.startDate.setText(sleep.getStartDate());
         holder.endDate.setText(sleep.getEndDate());
         holder.imgSleepingType.setBackgroundResource(
-                sleep.getType().toLowerCase().equals("nap") ?
+                sleep.getSleepType().toLowerCase().equals("NAP") ?
                         R.drawable.nap : R.drawable.deep_sleep
         );
-        holder.toggleButton.setChecked(sleep.getStatus().equals("COMPLETED"));
+        holder.toggleButton.setChecked(sleep.getReminderState().equals("COMPLETED"));
         holder.container.setOnClickListener(v -> itemClickListener.onClick(sleep));
     }
 

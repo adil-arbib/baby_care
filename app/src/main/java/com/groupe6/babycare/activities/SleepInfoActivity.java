@@ -34,11 +34,11 @@ public class SleepInfoActivity extends AppCompatActivity {
     }
 
     private void displayData() {
-        binding.inputType.setText(sleep.getType());
+        binding.inputType.setText(sleep.getSleepType());
         binding.inputStartDate.setText(sleep.getStartDate());
         binding.inputEndDate.setText(sleep.getEndDate());
         binding.inputAwakenings.setText(sleep.getAwakenings()+"");
-        binding.toggleButton.setChecked(sleep.getStatus().toLowerCase().equals("done"));
+        binding.toggleButton.setChecked(sleep.getReminderState().toLowerCase().equals("done"));
     }
 
     public void cancelChanges() {
