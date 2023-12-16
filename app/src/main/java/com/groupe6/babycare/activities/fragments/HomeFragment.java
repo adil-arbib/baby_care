@@ -48,15 +48,9 @@ public class HomeFragment extends Fragment implements OnItemClickListener<Simple
 
     public List<SimpleActivityDTO> getStaticActivities() {
         return new ArrayList<>(Arrays.asList(
-                new SimpleActivityDTO(1L,"sleeping", "2023-12-01 12:00:00"),
-                new SimpleActivityDTO(2L,"diaper", "2023-11-25 12:00:00"),
-                new SimpleActivityDTO(3L,"feeding", "2023-11-25 12:00:00"),
-                new SimpleActivityDTO(4L,"diaper", "2023-11-25 12:00:00"),
-                new SimpleActivityDTO(4L,"sleeping", "2023-11-25 12:00:00"),
-                new SimpleActivityDTO(4L,"diaper", "2023-11-25 12:00:00"),
-                new SimpleActivityDTO(4L,"diaper", "2023-11-25 12:00:00"),
-                new SimpleActivityDTO(4L,"sleeping", "2023-11-25 12:00:00"),
-                new SimpleActivityDTO(4L,"feeding", "2023-11-25 12:00:00")
+                new SimpleActivityDTO(1L,"sleeping", "2023-12-12 23:30:00"),
+                new SimpleActivityDTO(2L,"diaper", "2023-12-12 23:15:00"),
+                new SimpleActivityDTO(3L,"feeding", "2023-12-12 23:00:00")
         ));
     }
 

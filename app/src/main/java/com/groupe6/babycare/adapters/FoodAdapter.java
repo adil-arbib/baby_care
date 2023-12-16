@@ -1,5 +1,6 @@
 package com.groupe6.babycare.adapters;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +46,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         holder.label.setText(food.getLabel());
         holder.date.setText(food.getReminderDate());
         holder.quantity.setText(String.valueOf(food.getQuantity()));
-        holder.imgFeedingType.setBackgroundResource(getImgResource(food.getReminderState()));
+        holder.imgFeedingType.setBackgroundResource(getImgResource(food.getNutritionType()));
         holder.toggleButton.setChecked(food.getReminderState().equals("COMPLETED"));
         holder.container.setOnClickListener(v -> itemClickListener.onClick(food));
     }
@@ -85,6 +86,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                 return R.drawable.baby_food;
         }
         return R.drawable.baby_bottle;
+    }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setFoods(List<FoodDTO> foods) {
+        this.foods = foods;
+        notifyDataSetChanged();
     }
 
 }

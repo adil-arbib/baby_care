@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +38,11 @@ public class FeedingFragment extends Fragment implements OnItemClickListener<Foo
 
     FragmentFeedingBinding binding;
 
+    private List<FoodDTO> foods;
+
+    private FoodAdapter foodAdapter;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,7 +56,23 @@ public class FeedingFragment extends Fragment implements OnItemClickListener<Foo
         getActivity().setTitle(R.string.feeding);
 
         getNutritions();
+        binding.searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length() == 0) foodAdapter.setFoods(foods);
+                else foodAdapter.setFoods(searchFoods(s.toString()));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         binding.icAdd.setOnClickListener(v -> {
             AddFeedingDialog dialog = new AddFeedingDialog(getActivity());
             WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -67,7 +90,8 @@ public class FeedingFragment extends Fragment implements OnItemClickListener<Foo
         childApi.getChildNutrition(GlobalObjectsHolder.getInstance().getCurrentChild().getId(), new ResponseListener<List<FoodDTO>>() {
             @Override
             public void onSuccess(List<FoodDTO> response) {
-                FoodAdapter foodAdapter = new FoodAdapter(response, FeedingFragment.this);
+                foods = response;
+                foodAdapter = new FoodAdapter(response, FeedingFragment.this);
                 binding.recyclerFeeding.setAdapter(foodAdapter);
                 binding.recyclerFeeding.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -86,5 +110,16 @@ public class FeedingFragment extends Fragment implements OnItemClickListener<Foo
         Intent intent = new Intent(getActivity(), FeedingInfoActivity.class);
         intent.putExtra(GlobalKeys.FEEDING_KEY, item);
         startActivity(intent);
+    }
+
+    private List<FoodDTO> searchFoods(String input) {
+        ArrayList<FoodDTO> foodDTOS = new ArrayList<>();
+        for(FoodDTO food : foods) {
+            if(food.getLabel().toLowerCase().startsWith(input) || food.getReminderDate().startsWith(input)
+            || food.getReminderState().toLowerCase().equals(input))
+                foodDTOS.add(food);
+        }
+
+        return foodDTOS;
     }
 }
