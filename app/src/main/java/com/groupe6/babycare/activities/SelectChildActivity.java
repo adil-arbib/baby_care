@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.groupe6.babycare.adapters.ChildAdapter;
@@ -41,6 +42,7 @@ public class SelectChildActivity extends AppCompatActivity implements OnChildCli
         binding.progressBar.setVisibility(View.VISIBLE);
         SharedPreferencesUtils sharedPreferencesUtils = SharedPreferencesUtils.getInstance(getApplicationContext());
         ParentApiImpl parentApi = ParentApiImpl.getInstance(getApplicationContext());
+        Log.i("alo",sharedPreferencesUtils.getValue("parentId"));
         parentApi.getChildren(Long.parseLong(sharedPreferencesUtils.getValue("parentId")), new ResponseListener<List<ChildDTO>>() {
             @Override
             public void onSuccess(List<ChildDTO> response) {

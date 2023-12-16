@@ -8,23 +8,13 @@ import androidx.annotation.NonNull;
 public class SleepDTO implements Parcelable {
 
     private Long id;
-    private String type;
-    private String status;
-    private String date;
+
+    private int awakenings;
+    private String sleepType;
+
+    private String reminderState;
+
     private String startDate;
-    private String endDate;
-    int awakenings;
-
-
-    public SleepDTO(Long id, String type, String status, String date, String startDate, String endDate, int awakenings) {
-        this.id = id;
-        this.type = type;
-        this.status = status;
-        this.date = date;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.awakenings = awakenings;
-    }
 
     protected SleepDTO(Parcel in) {
         if (in.readByte() == 0) {
@@ -32,12 +22,11 @@ public class SleepDTO implements Parcelable {
         } else {
             id = in.readLong();
         }
-        type = in.readString();
-        status = in.readString();
-        date = in.readString();
+        awakenings = in.readInt();
+        sleepType = in.readString();
+        reminderState = in.readString();
         startDate = in.readString();
         endDate = in.readString();
-        awakenings = in.readInt();
     }
 
     public static final Creator<SleepDTO> CREATOR = new Creator<SleepDTO>() {
@@ -52,6 +41,18 @@ public class SleepDTO implements Parcelable {
         }
     };
 
+    @Override
+    public String toString() {
+        return "SleepDTO{" +
+                "id=" + id +
+                ", awakenings=" + awakenings +
+                ", sleepType='" + sleepType + '\'' +
+                ", reminderState='" + reminderState + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }
@@ -60,28 +61,28 @@ public class SleepDTO implements Parcelable {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public int getAwakenings() {
+        return awakenings;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setAwakenings(int awakenings) {
+        this.awakenings = awakenings;
     }
 
-    public String getStatus() {
-        return status;
+    public String getSleepType() {
+        return sleepType;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setSleepType(String sleepType) {
+        this.sleepType = sleepType;
     }
 
-    public String getDate() {
-        return date;
+    public String getReminderState() {
+        return reminderState;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setReminderState(String reminderState) {
+        this.reminderState = reminderState;
     }
 
     public String getStartDate() {
@@ -100,25 +101,15 @@ public class SleepDTO implements Parcelable {
         this.endDate = endDate;
     }
 
-    public int getAwakenings() {
-        return awakenings;
-    }
+    private String endDate;
 
-    public void setAwakenings(int awakenings) {
+    public SleepDTO(Long id, int awakenings, String sleepType, String reminderState, String startDate, String endDate) {
+        this.id = id;
         this.awakenings = awakenings;
-    }
-
-    @Override
-    public String toString() {
-        return "SleepDTO{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", status='" + status + '\'' +
-                ", date='" + date + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", awakenings=" + awakenings +
-                '}';
+        this.sleepType = sleepType;
+        this.reminderState = reminderState;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Override
@@ -127,18 +118,17 @@ public class SleepDTO implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
         if (id == null) {
-            dest.writeByte((byte) 0);
+            parcel.writeByte((byte) 0);
         } else {
-            dest.writeByte((byte) 1);
-            dest.writeLong(id);
+            parcel.writeByte((byte) 1);
+            parcel.writeLong(id);
         }
-        dest.writeString(type);
-        dest.writeString(status);
-        dest.writeString(date);
-        dest.writeString(startDate);
-        dest.writeString(endDate);
-        dest.writeInt(awakenings);
+        parcel.writeInt(awakenings);
+        parcel.writeString(sleepType);
+        parcel.writeString(reminderState);
+        parcel.writeString(startDate);
+        parcel.writeString(endDate);
     }
 }
