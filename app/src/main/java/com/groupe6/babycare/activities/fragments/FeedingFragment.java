@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.text.Editable;
@@ -15,18 +16,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.groupe6.babycare.R;
 import com.groupe6.babycare.activities.FeedingInfoActivity;
 import com.groupe6.babycare.activities.dialogs.AddFeedingDialog;
+import com.groupe6.babycare.activities.dialogs.DeleteDialog;
 import com.groupe6.babycare.adapters.FoodAdapter;
 import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.FragmentFeedingBinding;
 import com.groupe6.babycare.dtos.error.ErrorDTO;
 import com.groupe6.babycare.dtos.feeding.FoodDTO;
 import com.groupe6.babycare.holders.GlobalObjectsHolder;
+import com.groupe6.babycare.listeners.OnDeleteConfirmationListener;
 import com.groupe6.babycare.listeners.OnItemClickListener;
 import com.groupe6.babycare.listeners.ResponseListener;
+import com.groupe6.babycare.listeners.SwipeListener;
+import com.groupe6.babycare.listeners.SwipeToDeleteCallback;
 import com.groupe6.babycare.repositories.implementations.ChildApiImpl;
 
 import java.util.ArrayList;
@@ -34,7 +40,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class FeedingFragment extends Fragment implements OnItemClickListener<FoodDTO> {
+public class FeedingFragment extends Fragment implements OnItemClickListener<FoodDTO>, SwipeListener, OnDeleteConfirmationListener<FoodDTO> {
 
     FragmentFeedingBinding binding;
 
@@ -95,6 +101,10 @@ public class FeedingFragment extends Fragment implements OnItemClickListener<Foo
                 binding.recyclerFeeding.setAdapter(foodAdapter);
                 binding.recyclerFeeding.setLayoutManager(new LinearLayoutManager(getContext()));
 
+                SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(foodAdapter, FeedingFragment.this);
+                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
+                itemTouchHelper.attachToRecyclerView(binding.recyclerFeeding);
+
             }
 
             @Override
@@ -121,5 +131,29 @@ public class FeedingFragment extends Fragment implements OnItemClickListener<Foo
         }
 
         return foodDTOS;
+    }
+
+
+    @Override
+    public void onItemSwiped(int position) {
+        DeleteDialog<FoodDTO> deleteDialog = new DeleteDialog<>(getContext(),position,FeedingFragment.this);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(deleteDialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT ;
+        deleteDialog.show();
+        deleteDialog.getWindow().setAttributes(lp);
+
+    }
+
+    @Override
+    public void onConfirm(int itemPosition) {
+        if(itemPosition != -1){
+            FoodDTO food = foodAdapter.getFoods().get(itemPosition);
+            Toast.makeText(getContext(), food.getLabel() +" deleted successfully !!", Toast.LENGTH_SHORT).show();
+            foodAdapter.notifyItemRemoved(itemPosition);
+        }else {
+            foodAdapter.notifyDataSetChanged();
+        }
     }
 }

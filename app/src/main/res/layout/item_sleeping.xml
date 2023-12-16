@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    android:backgroundTint="@color/light_purple"
+    android:backgroundTint="@color/white"
     android:elevation="5dp"
     app:cardCornerRadius="10dp">
 
@@ -18,7 +18,7 @@
             android:id="@+id/img_feeding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/tips_purple"
+            android:backgroundTint="@color/light_grey"
             android:elevation="4dp"
             app:cardCornerRadius="5dp"
             app:layout_constraintBottom_toBottomOf="parent"

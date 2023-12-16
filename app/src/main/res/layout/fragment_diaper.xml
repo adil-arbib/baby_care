@@ -41,6 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/primary"
+        app:tint="@android:color/white"
         android:src="@drawable/ic_add"
         android:contentDescription="add" />
 

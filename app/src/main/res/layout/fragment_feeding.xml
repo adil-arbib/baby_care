@@ -13,7 +13,7 @@
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/search_bar_bg"
+        android:background="@drawable/white_search_bar_bg"
         app:layout_constraintTop_toTopOf="parent"
         android:hint="@string/search"
         android:paddingStart="20dp"
@@ -99,6 +99,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="@color/primary"
+        app:tint="@android:color/white"
         android:src="@drawable/ic_add"
         android:layout_margin="3dp"
         android:contentDescription="Add feeding" />

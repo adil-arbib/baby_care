@@ -95,4 +95,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
+
+    public List<FoodDTO> getFoods() {
+        return foods;
+    }
 }

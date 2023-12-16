@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="wrap_content"
-        android:backgroundTint="@color/light_purple"
+        android:backgroundTint="@color/light_grey"
         app:cardUseCompatPadding="true"
         app:cardElevation="4dp"
         app:cardCornerRadius="20dp"
@@ -41,7 +41,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Child name"
-                android:fontFamily="@font/jost_semi_bold"/>
+                android:textSize="16sp"
+                android:fontFamily="@font/jost_bold"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
