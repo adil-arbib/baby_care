@@ -99,10 +99,7 @@ public class ChartsFragment extends Fragment implements AdapterView.OnItemSelect
         entries.add(new Entry(2020, 2));
         entries.add(new Entry(2021, 5));
         entries.add(new Entry(2022, 8));
-        entries.add(new Entry(2023, 6));
-        entries.add(new Entry(2024, 5));
-        entries.add(new Entry(2025, 4));
-        entries.add(new Entry(2026, 10));
+        entries.add(new Entry(2023, 15));
 
         LineDataSet dataSet = new LineDataSet(entries, "");
         dataSet.setColor(R.color.primary);

@@ -3,7 +3,7 @@
     android:id="@+id/feeding_item" xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="@color/light_purple"
+    android:backgroundTint="@color/white"
     android:elevation="5dp"
     app:cardCornerRadius="10dp"
     android:layout_marginBottom="10dp"
@@ -20,7 +20,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/img_feeding"
             android:layout_width="wrap_content"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@color/light_grey"
             app:cardCornerRadius="5dp"
             android:elevation="4dp"
             app:layout_constraintStart_toStartOf="parent"

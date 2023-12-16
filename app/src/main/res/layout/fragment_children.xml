@@ -44,6 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:indeterminateTint="@color/primary"
+        app:tint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
