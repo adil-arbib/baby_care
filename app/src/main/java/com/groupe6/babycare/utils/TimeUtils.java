@@ -84,4 +84,15 @@ public class TimeUtils {
         }
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String formatSqlDatetime(String sqlDatetimeStr) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+
+        LocalDateTime parsedDatetime = LocalDateTime.parse(sqlDatetimeStr, formatter);
+
+        String formattedDatetime = parsedDatetime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return formattedDatetime;
+    }
+
 }
