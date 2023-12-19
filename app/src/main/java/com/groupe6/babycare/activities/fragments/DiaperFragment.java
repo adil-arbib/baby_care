@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.groupe6.babycare.R;
+import com.groupe6.babycare.activities.dialogs.AddChildDialog;
+import com.groupe6.babycare.activities.dialogs.AddDiaperDialog;
 import com.groupe6.babycare.adapters.DiaperAdapter;
 import com.groupe6.babycare.databinding.FragmentChildrenBinding;
 import com.groupe6.babycare.databinding.FragmentDiaperBinding;
@@ -41,6 +44,17 @@ public class DiaperFragment extends Fragment {
         DiaperAdapter diaperAdapter = new DiaperAdapter(getDate());
         binding.recyclerView.setAdapter(diaperAdapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        binding.icAdd.setOnClickListener(v -> {
+            AddDiaperDialog dialog = new AddDiaperDialog(getActivity());
+            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+            lp.copyFrom(dialog.getWindow().getAttributes());
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT ;
+            dialog.show();
+            dialog.getWindow().setAttributes(lp);
+        });
+
     }
 
     private static List<DiaperDTO> getDate() {

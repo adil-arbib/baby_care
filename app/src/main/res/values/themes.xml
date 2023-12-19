@@ -21,4 +21,8 @@
     <style name="MyToolbarStyle" parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="android:textColorSecondary">#333333</item>
     </style>
+
+    <style name="TimePickerDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/primary</item>
+    </style>
 </resources>

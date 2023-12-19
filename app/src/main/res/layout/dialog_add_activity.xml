@@ -54,7 +54,7 @@
         android:hint="@string/note"
         app:layout_constraintTop_toBottomOf="@+id/inp_type">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_name"
+            android:id="@+id/input_note"
             android:maxLength="100"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -84,6 +84,30 @@
             android:maxLength="30" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inp_time"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:hint="Time"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@drawable/ic_error"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inp_date"
+        app:startIconDrawable="@drawable/ic_calendar">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:maxLength="30" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/btn_add"
         android:layout_width="100dp"
@@ -93,7 +117,7 @@
         android:fontFamily="@font/jost_bold"
         android:text="@string/add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inp_date" />
+        app:layout_constraintTop_toBottomOf="@+id/inp_time" />
 
     <Button
         android:id="@+id/btn_cancel"

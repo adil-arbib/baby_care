@@ -12,10 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.groupe6.babycare.R;
 import com.groupe6.babycare.activities.ActivityInfoActivity;
 import com.groupe6.babycare.activities.SleepInfoActivity;
+import com.groupe6.babycare.activities.dialogs.AddDiaperDialog;
+import com.groupe6.babycare.activities.dialogs.AddNoteDialog;
+import com.groupe6.babycare.activities.dialogs.AddSleepDialog;
 import com.groupe6.babycare.adapters.FoodAdapter;
 import com.groupe6.babycare.adapters.SleepAdapter;
 import com.groupe6.babycare.consts.GlobalKeys;
@@ -52,6 +56,15 @@ public class SleepingFragment extends Fragment implements OnItemClickListener<Sl
         getActivity().setTitle(R.string.sleeping);
         getSleepingData();
 
+        binding.icAdd.setOnClickListener(v -> {
+            AddSleepDialog dialog = new AddSleepDialog(getActivity());
+            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+            lp.copyFrom(dialog.getWindow().getAttributes());
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT ;
+            dialog.show();
+            dialog.getWindow().setAttributes(lp);
+        });
 
 
     }

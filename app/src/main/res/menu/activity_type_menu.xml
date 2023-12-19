@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/play"
+        android:title="PLAY" />
+
+    <item
+        android:id="@+id/screen_time"
+        android:title="SCREEN_TIME" />
+
+    <item
+        android:id="@+id/bath"
+        android:title="BATH" />
+
+    <item
+        android:id="@+id/brash_teeth"
+        android:title="BRUSH_TEETH" />
+
+    <item
+        android:id="@+id/stroy_time"
+        android:title="STORY_TIME" />
+
+</menu>

@@ -1,5 +1,6 @@
 package com.groupe6.babycare.repositories.apis;
 
+import com.groupe6.babycare.dtos.feeding.FoodCreateDTO;
 import com.groupe6.babycare.dtos.feeding.FoodDTO;
 
 import retrofit2.Call;
@@ -18,7 +19,7 @@ public interface FoodApi {
     Call<List<FoodDTO>> getAll();
 
     @POST("/api/v1/nutrition/add")
-    Call<FoodDTO> createFood(@Body FoodDTO createRequest);
+    Call<FoodCreateDTO> createFood(@Body FoodCreateDTO createRequest);
 
     @PUT("/api/v1/nutrition/{id}/update")
     Call<FoodDTO> updateFood(@Body FoodDTO updateRequest, @Path("id") Long id);

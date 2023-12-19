@@ -2,6 +2,7 @@ package com.groupe6.babycare.repositories.implementations;
 
 import android.content.Context;
 
+import com.groupe6.babycare.dtos.feeding.FoodCreateDTO;
 import com.groupe6.babycare.dtos.feeding.FoodDTO;
 import com.groupe6.babycare.dtos.error.ErrorDTO;
 import com.groupe6.babycare.listeners.ResponseListener;
@@ -49,10 +50,10 @@ public class FoodApiImpl {
         });
     }
 
-    public void createFood(FoodDTO createRequest, final ResponseListener<FoodDTO> listener) {
-        foodApi.createFood(createRequest).enqueue(new Callback<FoodDTO>() {
+    public void createFood(FoodCreateDTO createRequest, final ResponseListener<FoodCreateDTO> listener) {
+        foodApi.createFood(createRequest).enqueue(new Callback<FoodCreateDTO>() {
             @Override
-            public void onResponse(Call<FoodDTO> call, Response<FoodDTO> response) {
+            public void onResponse(Call<FoodCreateDTO> call, Response<FoodCreateDTO> response) {
                 if (response.isSuccessful()) {
                     listener.onSuccess(response.body());
                 } else {
@@ -62,7 +63,7 @@ public class FoodApiImpl {
             }
 
             @Override
-            public void onFailure(Call<FoodDTO> call, Throwable t) {
+            public void onFailure(Call<FoodCreateDTO> call, Throwable t) {
                 // Handle failure
             }
         });

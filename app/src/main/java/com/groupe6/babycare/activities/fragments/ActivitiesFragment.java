@@ -11,12 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.groupe6.babycare.R;
 import com.groupe6.babycare.activities.ActivityInfoActivity;
 import com.groupe6.babycare.activities.FeedingInfoActivity;
 import com.groupe6.babycare.activities.MainActivity;
+import com.groupe6.babycare.activities.dialogs.AddActivityDialog;
+import com.groupe6.babycare.activities.dialogs.AddDiaperDialog;
 import com.groupe6.babycare.adapters.ActivityAdapter;
 import com.groupe6.babycare.adapters.SleepAdapter;
 import com.groupe6.babycare.consts.GlobalKeys;
@@ -54,6 +57,15 @@ public class ActivitiesFragment extends Fragment implements OnItemClickListener<
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        binding.icAdd.setOnClickListener(v -> {
+            AddActivityDialog dialog = new AddActivityDialog(getActivity());
+            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+            lp.copyFrom(dialog.getWindow().getAttributes());
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT ;
+            dialog.show();
+            dialog.getWindow().setAttributes(lp);
+        });
     }
 
     private List<ActivityDTO> getStaticActivityData() {

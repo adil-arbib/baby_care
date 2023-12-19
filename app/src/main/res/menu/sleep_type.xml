@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/solid"
-        android:title="SOLID"
+        android:id="@+id/deep"
+        android:title="DEEP"
         />
 
     <item
-        android:id="@+id/liquid"
-        android:title="LIQUID"
+        android:id="@+id/nap"
+        android:title="NAP"
         />
 
 
