@@ -5,21 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.groupe6.babycare.activities.dialogs.DatePickerDialog;
+import com.groupe6.babycare.activities.dialogs.DeleteDialog;
+import com.groupe6.babycare.activities.dialogs.SimpleDeleteDialog;
 import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.ActivityChildInfoBinding;
 import com.groupe6.babycare.dtos.children.ChildDTO;
 import com.groupe6.babycare.dtos.error.ErrorDTO;
+import com.groupe6.babycare.listeners.OnChildDeleteListener;
 import com.groupe6.babycare.listeners.OnDatePickListener;
 import com.groupe6.babycare.listeners.ResponseListener;
 import com.groupe6.babycare.repositories.implementations.ChildApiImpl;
 import com.groupe6.babycare.utils.InputsUtils;
 import com.groupe6.babycare.utils.TimeUtils;
 
-public class ChildInfoActivity extends AppCompatActivity implements OnDatePickListener {
+public class ChildInfoActivity extends AppCompatActivity implements OnDatePickListener, OnChildDeleteListener {
 
     private ChildDTO child;
 
@@ -56,6 +61,18 @@ public class ChildInfoActivity extends AppCompatActivity implements OnDatePickLi
 
         displayData();
 
+        binding.icDelete.setOnClickListener(v -> deleteChild());
+
+    }
+
+    private void deleteChild() {
+        SimpleDeleteDialog simpleDeleteDialog = new SimpleDeleteDialog(this, child.getFirstName(), this);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(simpleDeleteDialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT ;
+        simpleDeleteDialog.show();
+        simpleDeleteDialog.getWindow().setAttributes(lp);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -110,5 +127,25 @@ public class ChildInfoActivity extends AppCompatActivity implements OnDatePickLi
     public void onDatePick(int year, int month, int day) {
         binding.inputDate.setText(day+"/"+month+"/"+year);
         selectedDate = year + "-" + month + "-" + day;
+    }
+
+    @Override
+    public void onDelete(boolean confirmed) {
+        if(confirmed) {
+            ChildApiImpl childApi = ChildApiImpl.getInstance(this);
+            childApi.deleteChild(child.getId(), new ResponseListener<Void>() {
+                @Override
+                public void onSuccess(Void response) {
+                    Toast.makeText(ChildInfoActivity.this, "Child deleted successfully !!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+
+                @Override
+                public void onError(ErrorDTO error) {
+                    Log.e("ERROR", error.getMessage());
+                    Toast.makeText(ChildInfoActivity.this, "An error was occurred !!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }

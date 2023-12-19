@@ -30,7 +30,7 @@ public interface ChildApi {
     @GET("/api/v1/children/{id}")
     Call<ChildDTO> getChildById(@Path("id") Long id);
 
-    @DELETE("/api/v1/children/{id}")
+    @DELETE("/api/v1/children/{id}/delete")
     Call<Void> delete(@Path("id") Long id);
 
     @GET("/api/v1/children/{id}/nutritions")
