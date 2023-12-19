@@ -38,6 +38,7 @@ public class AddHealthCare  extends Dialog implements OnDatePickListener, OnTime
 
     public AddHealthCare(@NonNull Context context) {
         super(context);
+        this.context = context;
     }
 
 

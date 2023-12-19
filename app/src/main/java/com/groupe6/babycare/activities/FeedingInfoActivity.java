@@ -15,6 +15,7 @@ import com.groupe6.babycare.dtos.feeding.FoodDTO;
 import com.groupe6.babycare.listeners.ResponseListener;
 import com.groupe6.babycare.repositories.implementations.FoodApiImpl;
 import com.groupe6.babycare.utils.InputsUtils;
+import com.groupe6.babycare.utils.TimeUtils;
 
 public class FeedingInfoActivity extends AppCompatActivity {
 
@@ -42,6 +43,9 @@ public class FeedingInfoActivity extends AppCompatActivity {
         binding.btnSave.setOnClickListener(v -> {
             saveChanges();
         });
+        binding.btnCancel.setOnClickListener(v -> {
+            cancelChanges();
+        });
     }
 
     private void displayData() {
@@ -60,7 +64,7 @@ public class FeedingInfoActivity extends AppCompatActivity {
         foodDTO.setLabel(binding.inputLabel.getText().toString());
         foodDTO.setNutritionType(binding.inputType.getText().toString());
         foodDTO.setQuantity(Double.parseDouble(binding.inputQuantity.getText().toString()));
-        foodDTO.setReminderDate(food.getReminderDate());
+        foodDTO.setReminderDate(TimeUtils.formatFromSqlDateToRegular(food.getReminderDate()));
         foodDTO.setReminderState(food.getReminderState());
         FoodApiImpl foodApi = FoodApiImpl.getInstance(getApplicationContext());
         foodApi.updateFood(foodDTO, food.getId(), new ResponseListener<FoodDTO>() {

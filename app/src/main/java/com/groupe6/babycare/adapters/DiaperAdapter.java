@@ -62,4 +62,9 @@ public class DiaperAdapter extends RecyclerView.Adapter<DiaperAdapter.ViewHolder
         this.diaperList = diaperList;
         notifyDataSetChanged();
     }
+
+    public List<DiaperDTO> getDiaperList() {
+        return diaperList;
+    }
+
 }

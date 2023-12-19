@@ -46,6 +46,9 @@
             android:name=".activities.LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.HealthCareInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.WelcomeActivity"
             android:exported="true">
             <intent-filter>

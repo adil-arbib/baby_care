@@ -1,6 +1,7 @@
 package com.groupe6.babycare.adapters;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +9,14 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.groupe6.babycare.R;
 import com.groupe6.babycare.dtos.healthcare.HealthCareDTO;
 import com.groupe6.babycare.listeners.OnItemClickListener;
+import com.groupe6.babycare.utils.TimeUtils;
 
 import java.util.List;
 
@@ -36,10 +39,11 @@ public class HealthCareAdapter extends RecyclerView.Adapter<HealthCareAdapter.Vi
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull HealthCareAdapter.ViewHolder holder, int position) {
         HealthCareDTO health = healthCareDTOS.get(position);
-        holder.date.setText(health.getReminderDate());
+        holder.date.setText(TimeUtils.formatSqlDatetime(health.getReminderDate()));
         holder.notes.setText(health.getNotes());
         holder.toggleButton.setChecked(health.getReminderState().equals("COMPLETED"));
         holder.container.setOnClickListener(v -> itemClickListener.onClick(health));
@@ -62,7 +66,7 @@ public class HealthCareAdapter extends RecyclerView.Adapter<HealthCareAdapter.Vi
             notes = itemView.findViewById(R.id.txt_note);
             type = itemView.findViewById(R.id.txt_type);
             date = itemView.findViewById(R.id.txt_date);
-            toggleButton = itemView.findViewById(R.id.toggle_button);
+            toggleButton = itemView.findViewById(R.id.checkBox);
         }
     }
 
