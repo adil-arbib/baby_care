@@ -67,10 +67,10 @@ public class SleepApiImpl {
         });
     }
 
-    public void updateSleep(SleepDTO updateRequest, Long id, final ResponseListener<Void> listener) {
-        sleepApi.updateSleep(updateRequest, id).enqueue(new Callback<Void>() {
+    public void updateSleep(SleepDTO updateRequest, Long id, final ResponseListener<SleepDTO> listener) {
+        sleepApi.updateSleep(updateRequest, id).enqueue(new Callback<SleepDTO>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<SleepDTO> call, Response<SleepDTO> response) {
                 if (response.isSuccessful()) {
                     listener.onSuccess(null);
                 } else {
@@ -80,7 +80,7 @@ public class SleepApiImpl {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<SleepDTO> call, Throwable t) {
                 // Handle failure
             }
         });
