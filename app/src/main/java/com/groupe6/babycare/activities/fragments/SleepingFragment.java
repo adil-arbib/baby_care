@@ -1,5 +1,6 @@
 package com.groupe6.babycare.activities.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.groupe6.babycare.R;
 import com.groupe6.babycare.activities.ActivityInfoActivity;
@@ -20,18 +22,22 @@ import com.groupe6.babycare.activities.SleepInfoActivity;
 import com.groupe6.babycare.activities.dialogs.AddDiaperDialog;
 import com.groupe6.babycare.activities.dialogs.AddNoteDialog;
 import com.groupe6.babycare.activities.dialogs.AddSleepDialog;
+import com.groupe6.babycare.activities.dialogs.DeleteDialog;
 import com.groupe6.babycare.adapters.FoodAdapter;
 import com.groupe6.babycare.adapters.SleepAdapter;
 import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.ActivitySleepInfoBinding;
 import com.groupe6.babycare.databinding.FragmentFeedingBinding;
 import com.groupe6.babycare.databinding.FragmentSleepingBinding;
+import com.groupe6.babycare.dtos.activities.ActivityDTO;
 import com.groupe6.babycare.dtos.error.ErrorDTO;
 import com.groupe6.babycare.dtos.feeding.FoodDTO;
 import com.groupe6.babycare.dtos.sleeping.SleepDTO;
 import com.groupe6.babycare.holders.GlobalObjectsHolder;
+import com.groupe6.babycare.listeners.OnDeleteConfirmationListener;
 import com.groupe6.babycare.listeners.OnItemClickListener;
 import com.groupe6.babycare.listeners.ResponseListener;
+import com.groupe6.babycare.listeners.SwipeListener;
 import com.groupe6.babycare.repositories.implementations.ChildApiImpl;
 
 import java.util.ArrayList;
@@ -39,9 +45,10 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class SleepingFragment extends Fragment implements OnItemClickListener<SleepDTO> {
+public class SleepingFragment extends Fragment implements OnItemClickListener<SleepDTO>, SwipeListener, OnDeleteConfirmationListener<SleepDTO> {
 
     FragmentSleepingBinding binding;
+    private SleepAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,5 +102,27 @@ public class SleepingFragment extends Fragment implements OnItemClickListener<Sl
         Intent intent = new Intent(getActivity(), SleepInfoActivity.class);
         intent.putExtra(GlobalKeys.SLEEP_KEY, item);
         startActivity(intent);
+    }
+
+    @Override
+    public void onConfirm(int itemPosition) {
+        if(itemPosition != -1){
+            Toast.makeText(getContext(), "Activity deleted successfully !!", Toast.LENGTH_SHORT).show();
+            adapter.getSleepList().remove(itemPosition);
+            adapter.notifyItemRemoved(itemPosition);
+        }else {
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onItemSwiped(int position) {
+        DeleteDialog<SleepDTO> deleteDialog = new DeleteDialog<>(getContext(),position,SleepingFragment.this);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(deleteDialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT ;
+        deleteDialog.show();
+        deleteDialog.getWindow().setAttributes(lp);
     }
 }
