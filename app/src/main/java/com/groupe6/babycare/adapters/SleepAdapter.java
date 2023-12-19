@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.groupe6.babycare.R;
+import com.groupe6.babycare.dtos.activities.ActivityDTO;
 import com.groupe6.babycare.dtos.feeding.FoodDTO;
 import com.groupe6.babycare.dtos.sleeping.SleepDTO;
 import com.groupe6.babycare.listeners.OnItemClickListener;
@@ -78,6 +79,10 @@ public class SleepAdapter extends RecyclerView.Adapter<SleepAdapter.ViewHolder> 
 
         }
     }
+    public List<SleepDTO> getSleepList() {
+        return sleepList;
+    }
+
 
     public List<SleepDTO> getSleepList() {
         return sleepList;
