@@ -12,6 +12,9 @@ public class NoteDTO implements Parcelable {
     private String content;
     private String date;
 
+    public NoteDTO() {
+    }
+
     public NoteDTO(Long id, String title, String content, String date) {
         this.id = id;
         this.title = title;

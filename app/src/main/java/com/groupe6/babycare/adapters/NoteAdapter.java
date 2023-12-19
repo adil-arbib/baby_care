@@ -47,7 +47,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         holder.content.setText(note.getContent());
         holder.date.setText(note.getDate());
         holder.container.setOnClickListener(v -> itemClickListener.onClick(note));
-        holder.icDelete.setOnClickListener(v -> itemDeleteListener.onDeleteRequest(note));
     }
 
     @Override
@@ -58,7 +57,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         CardView container;
         TextView title, content, date;
-        ImageView icDelete;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,7 +65,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             title = itemView.findViewById(R.id.txt_title);
             content = itemView.findViewById(R.id.txt_content);
             date = itemView.findViewById(R.id.txt_date);
-            icDelete = itemView.findViewById(R.id.ic_delete);
         }
     }
 }
