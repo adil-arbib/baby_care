@@ -5,6 +5,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.groupe6.babycare.dtos.activities.ActivityCreateDTO;
 import com.groupe6.babycare.dtos.activities.ActivityDTO;
 import com.groupe6.babycare.dtos.activities.SimpleActivityDTO;
 import com.groupe6.babycare.dtos.auth.TokenResponse;
@@ -46,10 +47,10 @@ public class ActivityApiImpl {
         });
     }
 
-    public void addActivity(SimpleActivityDTO simpleActivityDTO, final ResponseListener<TokenResponse> listener) {
-        activityApi.addActivity(simpleActivityDTO).enqueue(new Callback<TokenResponse>() {
+    public void addActivity(ActivityCreateDTO activityCreateDTO, final ResponseListener<ActivityCreateDTO> listener) {
+        activityApi.addActivity(activityCreateDTO).enqueue(new Callback<ActivityCreateDTO>() {
             @Override
-            public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+            public void onResponse(Call<ActivityCreateDTO> call, Response<ActivityCreateDTO> response) {
                 if(response.isSuccessful()) listener.onSuccess(response.body());
                 else {
                     ErrorDTO errorDTO = new ErrorDTO(response.message(), response.code());
@@ -58,7 +59,7 @@ public class ActivityApiImpl {
             }
 
             @Override
-            public void onFailure(Call<TokenResponse> call, Throwable t) {
+            public void onFailure(Call<ActivityCreateDTO> call, Throwable t) {
             }
         });
     }

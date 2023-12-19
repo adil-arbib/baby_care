@@ -12,7 +12,7 @@
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/search_bar_bg"
+        android:background="@drawable/white_search_bar_bg"
         app:layout_constraintTop_toTopOf="parent"
         android:hint="@string/search"
         android:paddingStart="20dp"
@@ -20,15 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <ImageView
-        android:id="@+id/ic_filter"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        app:layout_constraintEnd_toEndOf="@+id/search_bar"
-        app:layout_constraintTop_toTopOf="@+id/search_bar"
-        app:layout_constraintBottom_toBottomOf="@+id/search_bar"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_filter"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -43,52 +34,6 @@
         tools:listitem="@layout/item_activity2" />
 
 
-    <LinearLayout
-        android:id="@+id/filter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/filter_bg"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:visibility="invisible"
-        android:layout_marginTop="2dp"
-        app:layout_constraintEnd_toEndOf="@+id/ic_filter"
-        app:layout_constraintTop_toBottomOf="@+id/ic_filter"
-        android:orientation="vertical">
-        <RadioGroup
-            android:id="@+id/radio_gender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_gender"
-            app:layout_constraintStart_toEndOf="@+id/txt_gender"
-            app:layout_constraintTop_toTopOf="@+id/txt_gender">
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/radioAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/primary"
-                android:fontFamily="@font/jost_semi_bold"
-                android:text="@string/all" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/radioDone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/primary"
-                android:fontFamily="@font/jost_semi_bold"
-                android:text="@string/done" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/radioUndone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/primary"
-                android:fontFamily="@font/jost_semi_bold"
-                android:text="@string/undone" />
-        </RadioGroup>
-    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/ic_add"
@@ -98,8 +43,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="@color/primary"
+        app:tint="@android:color/white"
         android:src="@drawable/ic_add"
         android:layout_margin="3dp"
+
         android:contentDescription="Add Activity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

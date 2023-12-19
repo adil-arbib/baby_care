@@ -7,13 +7,20 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.groupe6.babycare.R;
+import com.groupe6.babycare.dtos.activities.ActivityCreateDTO;
+import com.groupe6.babycare.dtos.error.ErrorDTO;
+import com.groupe6.babycare.holders.GlobalObjectsHolder;
 import com.groupe6.babycare.listeners.OnDatePickListener;
 import com.groupe6.babycare.listeners.OnTimePickerListener;
+import com.groupe6.babycare.listeners.ResponseListener;
+import com.groupe6.babycare.repositories.implementations.ActivityApiImpl;
+import com.groupe6.babycare.utils.InputsUtils;
 
 public class AddActivityDialog extends Dialog implements OnDatePickListener, OnTimePickerListener {
 
@@ -25,7 +32,9 @@ public class AddActivityDialog extends Dialog implements OnDatePickListener, OnT
 
     private Context context;
 
-    private String fullDate;
+    private String selectedDate;
+
+    private String selectedTime;
 
     public AddActivityDialog(@NonNull Context context) {
         super(context);
@@ -43,6 +52,9 @@ public class AddActivityDialog extends Dialog implements OnDatePickListener, OnT
         inputTime = findViewById(R.id.input_time);
         inputNote = findViewById(R.id.input_note);
 
+        btnAdd = findViewById(R.id.btn_add);
+        btnCancel = findViewById(R.id.btn_cancel);
+
         inputType.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(context, inputType);
             popupMenu.getMenuInflater().inflate(R.menu.activity_type_menu, popupMenu.getMenu());
@@ -57,7 +69,7 @@ public class AddActivityDialog extends Dialog implements OnDatePickListener, OnT
 
         inputType.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(context, inputType);
-            popupMenu.getMenuInflater().inflate(R.menu.feeding_type_menu, popupMenu.getMenu());
+            popupMenu.getMenuInflater().inflate(R.menu.activity_type_menu, popupMenu.getMenu());
 
             popupMenu.setOnMenuItemClickListener(item -> {
                 inputType.setText(item.getTitle());
@@ -79,15 +91,56 @@ public class AddActivityDialog extends Dialog implements OnDatePickListener, OnT
             timePickerDialog.open();
         });
 
+        btnCancel.setOnClickListener(v -> {
+            dismiss();
+        });
+
+
+        btnAdd.setOnClickListener(v -> {
+            save();
+        });
+
+    }
+
+    private void save() {
+        if (!InputsUtils.validateInputs(inputDate, inputTime, inputNote))
+            return;
+        if (!inputType.getText().toString().isEmpty()) {
+            String activityType = inputType.getText().toString();
+            String date = selectedDate + "T" + selectedTime;
+            String notes = inputNote.getText().toString();
+            ActivityCreateDTO activityCreateDTO = new ActivityCreateDTO(
+                    activityType,
+                    date,
+                    GlobalObjectsHolder.getInstance().getCurrentChild().getId(),
+                    notes
+            );
+
+            ActivityApiImpl activityApi = ActivityApiImpl.getInstance(getContext());
+            activityApi.addActivity(activityCreateDTO, new ResponseListener<ActivityCreateDTO>() {
+                @Override
+                public void onSuccess(ActivityCreateDTO response) {
+                    Toast.makeText(context, "Activity added successfully !!", Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
+
+                @Override
+                public void onError(ErrorDTO error) {
+                    Toast.makeText(context, "An error was occured !!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     @Override
     public void onDatePick(int year, int month, int day) {
-
+        inputDate.setText(year + "-" + month + "-" + day);
+        selectedDate = year + "-" + month + "-" + day;
     }
 
     @Override
     public void onTimePick(int hour, int minute) {
-
+        inputTime.setText(hour + ":" + minute);
+        selectedTime = hour + ":" + minute + ":00";
     }
 }

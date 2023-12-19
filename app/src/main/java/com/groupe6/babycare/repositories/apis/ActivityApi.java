@@ -1,5 +1,6 @@
 package com.groupe6.babycare.repositories.apis;
 
+import com.groupe6.babycare.dtos.activities.ActivityCreateDTO;
 import com.groupe6.babycare.dtos.activities.ActivityDTO;
 import com.groupe6.babycare.dtos.activities.SimpleActivityDTO;
 import com.groupe6.babycare.dtos.auth.TokenResponse;
@@ -16,8 +17,8 @@ public interface ActivityApi {
     @GET("/api/v1/activity")
     Call<TokenResponse> getAll();
 
-    @POST("/api/v1/activity/")
-    Call<TokenResponse> addActivity(@Body SimpleActivityDTO simpleActivityDTO);
+    @POST("/api/v1/activity")
+    Call<ActivityCreateDTO> addActivity(@Body ActivityCreateDTO activityCreateDTO);
 
     @PUT("/api/v1/activity/{id}")
     Call<TokenResponse> updateActivity(@Body ActivityDTO activityDTO, @Path("id") Long id);
