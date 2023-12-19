@@ -1,6 +1,7 @@
 package com.groupe6.babycare.repositories.apis;
 
 import com.groupe6.babycare.dtos.children.ChildDTO;
+import com.groupe6.babycare.dtos.diaper.DiaperDTO;
 import com.groupe6.babycare.dtos.feeding.FoodDTO;
 import com.groupe6.babycare.dtos.sleeping.SleepDTO;
 
@@ -36,4 +37,7 @@ public interface ChildApi {
 
     @GET("/api/v1/children/{id}/sleep")
     Call<List<SleepDTO>> getChildSleep(@Path("id") Long id);
+
+    @GET("/api/v1/children/{id}/diaper")
+    Call<List<DiaperDTO>> getChildDiaper(@Path("id") Long id);
 }

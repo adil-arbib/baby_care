@@ -3,6 +3,7 @@ package com.groupe6.babycare.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.groupe6.babycare.R;
 import com.groupe6.babycare.dtos.diaper.DiaperDTO;
+import com.groupe6.babycare.listeners.OnItemClickListener;
 
 import java.util.List;
 
@@ -17,8 +19,11 @@ public class DiaperAdapter extends RecyclerView.Adapter<DiaperAdapter.ViewHolder
 
     private List<DiaperDTO> diaperList;
 
-    public DiaperAdapter(List<DiaperDTO> diaperList) {
+    private OnItemClickListener<DiaperDTO> listener;
+
+    public DiaperAdapter(List<DiaperDTO> diaperList, OnItemClickListener<DiaperDTO> listener) {
         this.diaperList = diaperList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -32,7 +37,8 @@ public class DiaperAdapter extends RecyclerView.Adapter<DiaperAdapter.ViewHolder
     public void onBindViewHolder(@NonNull DiaperAdapter.ViewHolder holder, int position) {
         DiaperDTO diaperDTO = diaperList.get(position);
         holder.txtType.setText(diaperDTO.getDiaperType());
-
+        holder.txtDate.setText(diaperDTO.getReminderDate());
+        holder.checkBox.setChecked(diaperDTO.getReminderState().equals("COMPLETED"));
     }
 
     @Override
@@ -43,10 +49,12 @@ public class DiaperAdapter extends RecyclerView.Adapter<DiaperAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView txtType, txtDate;
+        private CheckBox checkBox;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtType = itemView.findViewById(R.id.txt_type_value);
-            txtType = itemView.findViewById(R.id.txt_date_value);
+            txtDate = itemView.findViewById(R.id.txt_date_value);
+            checkBox = itemView.findViewById(R.id.toggle_button);
         }
     }
 

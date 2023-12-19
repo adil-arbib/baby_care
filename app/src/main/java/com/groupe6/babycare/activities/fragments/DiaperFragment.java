@@ -5,8 +5,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +18,31 @@ import com.groupe6.babycare.R;
 import com.groupe6.babycare.activities.dialogs.AddChildDialog;
 import com.groupe6.babycare.activities.dialogs.AddDiaperDialog;
 import com.groupe6.babycare.adapters.DiaperAdapter;
-import com.groupe6.babycare.databinding.FragmentChildrenBinding;
+import com.groupe6.babycare.adapters.FoodAdapter;
+
 import com.groupe6.babycare.databinding.FragmentDiaperBinding;
 import com.groupe6.babycare.dtos.diaper.DiaperDTO;
+import com.groupe6.babycare.dtos.error.ErrorDTO;
+import com.groupe6.babycare.dtos.feeding.FoodDTO;
+import com.groupe6.babycare.holders.GlobalObjectsHolder;
+import com.groupe6.babycare.listeners.OnItemClickListener;
+import com.groupe6.babycare.listeners.ResponseListener;
+import com.groupe6.babycare.listeners.SwipeToDeleteCallback;
+import com.groupe6.babycare.repositories.implementations.ChildApiImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-public class DiaperFragment extends Fragment {
+public class DiaperFragment extends Fragment implements OnItemClickListener<DiaperDTO> {
 
     private FragmentDiaperBinding binding;
+
+    private DiaperAdapter diaperAdapter;
+
+    private List<DiaperDTO> diaperList;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,10 +56,10 @@ public class DiaperFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        DiaperAdapter diaperAdapter = new DiaperAdapter(getDate());
-        binding.recyclerView.setAdapter(diaperAdapter);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+//        binding.recyclerView.setAdapter(diaperAdapter);
+//        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        getData();
         binding.icAdd.setOnClickListener(v -> {
             AddDiaperDialog dialog = new AddDiaperDialog(getActivity());
             WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -57,18 +72,32 @@ public class DiaperFragment extends Fragment {
 
     }
 
-    private static List<DiaperDTO> getDate() {
-        return new ArrayList<>(Arrays.asList(
-                new DiaperDTO(1L, "DRY"),
-                new DiaperDTO(1L, "WET"),
-                new DiaperDTO(1L, "LIQUID"),
-                new DiaperDTO(1L, "DRY"),
-                new DiaperDTO(1L, "DRY"),
-                new DiaperDTO(1L, "LIQUID")
+    private void getData() {
+        ChildApiImpl childApi = ChildApiImpl.getInstance(getContext());
+        childApi.getChildDiaper(GlobalObjectsHolder.getInstance().getCurrentChild().getId(), new ResponseListener<List<DiaperDTO>>() {
+            @Override
+            public void onSuccess(List<DiaperDTO> response) {
+                diaperList = response;
+                diaperAdapter = new DiaperAdapter(response, DiaperFragment.this);
+                binding.recyclerView.setAdapter(diaperAdapter);
+                binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ));
+//                SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(foodAdapter, FeedingFragment.this);
+//                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
+//                itemTouchHelper.attachToRecyclerView(binding.recyclerFeeding);
+
+            }
+
+            @Override
+            public void onError(ErrorDTO error) {
+                Log.e("Error", error.toString());
+            }
+        });
     }
 
 
+    @Override
+    public void onClick(DiaperDTO item) {
 
+    }
 }

@@ -45,6 +45,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/jost_regular"
             android:text="Date :"
+            android:layout_marginTop="6dp"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,13 +56,13 @@
             android:id="@+id/txt_date_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/jost_bold"
             android:text="10:00 PM Nov 25, 2032"
             android:textColor="@color/medium_black"
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="@+id/txt_type_value"
-            app:layout_constraintTop_toBottomOf="@+id/txt_type_value" />
+            app:layout_constraintTop_toTopOf="@+id/txt_date"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_date"/>
 
         <CheckBox
             android:id="@+id/toggle_button"

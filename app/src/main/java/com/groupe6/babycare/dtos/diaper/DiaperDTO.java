@@ -6,13 +6,17 @@ public class DiaperDTO {
 
     private String diaperType;
 
-    public DiaperDTO() {
-    }
+    private String reminderDate;
 
-    public DiaperDTO(Long id, String diaperType) {
+    private String reminderState;
+
+    public DiaperDTO(Long id, String diaperType, String reminderDate, String reminderState) {
         this.id = id;
         this.diaperType = diaperType;
+        this.reminderDate = reminderDate;
+        this.reminderState = reminderState;
     }
+
     public Long getId() {
         return id;
     }
@@ -29,11 +33,19 @@ public class DiaperDTO {
         this.diaperType = diaperType;
     }
 
-    @Override
-    public String toString() {
-        return "DiaperDTO{" +
-                "id=" + id +
-                ", diaperType='" + diaperType + '\'' +
-                '}';
+    public String getReminderDate() {
+        return reminderDate;
+    }
+
+    public void setReminderDate(String reminderDate) {
+        this.reminderDate = reminderDate;
+    }
+
+    public String getReminderState() {
+        return reminderState;
+    }
+
+    public void setReminderState(String reminderState) {
+        this.reminderState = reminderState;
     }
 }
