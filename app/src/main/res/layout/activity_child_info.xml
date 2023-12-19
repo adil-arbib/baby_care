@@ -30,6 +30,15 @@
         android:textColor="@color/black"
         android:text="Child information"/>
 
+    <ImageView
+        android:id="@+id/ic_delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txt_add_child"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_add_child"
+        android:src="@drawable/ic_delete"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inp_name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

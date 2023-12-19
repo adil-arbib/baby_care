@@ -20,7 +20,7 @@ public interface SleepApi {
     Call<SleepDTO> createSleep(@Body SleepDTO createRequest);
 
     @PUT("/api/v1/sleep/{id}")
-    Call<Void> updateSleep(@Body SleepDTO updateRequest, @Path("id") Long id);
+    Call<SleepDTO> updateSleep(@Body SleepDTO updateRequest, @Path("id") Long id);
 
     @DELETE("/api/v1/sleep/{id}")
     Call<Void> deleteSleep(@Path("id") Long id);
