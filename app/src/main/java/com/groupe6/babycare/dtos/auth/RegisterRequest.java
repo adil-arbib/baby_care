@@ -1,37 +1,17 @@
 package com.groupe6.babycare.dtos.auth;
 
 public class RegisterRequest {
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String email;
+    private String password;
+    private String gender;
 
-    public RegisterRequest(String firstname, String lastname, String email) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public RegisterRequest(String firstName, String lastName, String email, String password, String gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        this.password = password;
+        this.gender = gender;
     }
 }
