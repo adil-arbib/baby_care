@@ -48,6 +48,10 @@ public class ActivityDTO implements Parcelable {
         }
     };
 
+    public ActivityDTO() {
+
+    }
+
     public Long getId() {
         return id;
     }

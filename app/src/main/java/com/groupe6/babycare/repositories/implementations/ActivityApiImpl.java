@@ -64,10 +64,10 @@ public class ActivityApiImpl {
         });
     }
 
-    public void updateActivity(ActivityDTO activityDTO, Long id, final ResponseListener<TokenResponse> listener) {
-        activityApi.updateActivity(activityDTO, id).enqueue(new Callback<TokenResponse>() {
+    public void updateActivity(ActivityDTO activityDTO, Long id, final ResponseListener<ActivityDTO> listener) {
+        activityApi.updateActivity(activityDTO, id).enqueue(new Callback<ActivityDTO>() {
             @Override
-            public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+            public void onResponse(Call<ActivityDTO> call, Response<ActivityDTO> response) {
                 if(response.isSuccessful()) listener.onSuccess(response.body());
                 else {
                     ErrorDTO errorDTO = new ErrorDTO(response.message(), response.code());
@@ -76,11 +76,12 @@ public class ActivityApiImpl {
             }
 
             @Override
-            public void onFailure(Call<TokenResponse> call, Throwable t) {
+            public void onFailure(Call<ActivityDTO> call, Throwable t) {
             }
         });
     }
 
+    /*
     public void getActivityById(Long id, final ResponseListener<TokenResponse> listener) {
         activityApi.getActivityById(id).enqueue(new Callback<TokenResponse>() {
             @Override
@@ -98,6 +99,8 @@ public class ActivityApiImpl {
         });
     }
 
+
+
     public void deleteActivity(Long id, final ResponseListener<TokenResponse> listener) {
         activityApi.delete(id).enqueue(new Callback<TokenResponse>() {
             @Override
@@ -114,6 +117,8 @@ public class ActivityApiImpl {
             }
         });
     }
+
+     */
 
 
 }

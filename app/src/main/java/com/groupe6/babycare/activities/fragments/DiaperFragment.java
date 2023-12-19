@@ -1,5 +1,6 @@
 package com.groupe6.babycare.activities.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,11 +16,13 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.groupe6.babycare.R;
+import com.groupe6.babycare.activities.FeedingInfoActivity;
 import com.groupe6.babycare.activities.dialogs.AddChildDialog;
 import com.groupe6.babycare.activities.dialogs.AddDiaperDialog;
 import com.groupe6.babycare.adapters.DiaperAdapter;
 import com.groupe6.babycare.adapters.FoodAdapter;
 
+import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.FragmentDiaperBinding;
 import com.groupe6.babycare.dtos.diaper.DiaperDTO;
 import com.groupe6.babycare.dtos.error.ErrorDTO;
@@ -98,6 +101,8 @@ public class DiaperFragment extends Fragment implements OnItemClickListener<Diap
 
     @Override
     public void onClick(DiaperDTO item) {
-
+        Intent intent = new Intent(getActivity(), FeedingInfoActivity.class);
+        intent.putExtra(GlobalKeys.DIAPER_KEY, (CharSequence) item);
+        startActivity(intent);
     }
 }

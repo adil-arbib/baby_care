@@ -21,12 +21,12 @@ public interface ActivityApi {
     Call<ActivityCreateDTO> addActivity(@Body ActivityCreateDTO activityCreateDTO);
 
     @PUT("/api/v1/activity/{id}")
-    Call<TokenResponse> updateActivity(@Body ActivityDTO activityDTO, @Path("id") Long id);
+    Call<ActivityDTO> updateActivity(@Body ActivityDTO activityDTO, @Path("id") Long id);
 
     @GET("/api/v1/activity/{id}")
-    Call<TokenResponse> getActivityById(@Path("id") Long id);
+    Call<ActivityDTO> getActivityById(@Path("id") Long id);
 
     @DELETE("/api/v1/activity/{id}")
-    Call<TokenResponse> delete(@Path("id") Long id);
+    Call<Void> delete(@Path("id") Long id);
 
 }

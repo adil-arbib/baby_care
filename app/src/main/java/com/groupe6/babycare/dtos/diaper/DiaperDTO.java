@@ -1,6 +1,11 @@
 package com.groupe6.babycare.dtos.diaper;
 
-public class DiaperDTO {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class DiaperDTO implements Parcelable {
 
     private Long id;
 
@@ -16,6 +21,29 @@ public class DiaperDTO {
         this.reminderDate = reminderDate;
         this.reminderState = reminderState;
     }
+
+    protected DiaperDTO(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readLong();
+        }
+        diaperType = in.readString();
+        reminderDate = in.readString();
+        reminderState = in.readString();
+    }
+
+    public static final Creator<DiaperDTO> CREATOR = new Creator<DiaperDTO>() {
+        @Override
+        public DiaperDTO createFromParcel(Parcel in) {
+            return new DiaperDTO(in);
+        }
+
+        @Override
+        public DiaperDTO[] newArray(int size) {
+            return new DiaperDTO[size];
+        }
+    };
 
     public Long getId() {
         return id;
@@ -47,5 +75,20 @@ public class DiaperDTO {
 
     public void setReminderState(String reminderState) {
         this.reminderState = reminderState;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeLong(id);
+
+        dest.writeString(diaperType);
+        dest.writeString(reminderState);
+        dest.writeString(reminderDate);
+
     }
 }
