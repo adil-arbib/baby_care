@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.groupe6.babycare.R;
 import com.groupe6.babycare.dtos.activities.SimpleActivityDTO;
+import com.groupe6.babycare.dtos.reminder.ReminderDTO;
 import com.groupe6.babycare.listeners.OnItemClickListener;
 import com.groupe6.babycare.utils.TimeUtils;
 
@@ -20,12 +21,12 @@ import java.util.List;
 
 public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.ViewHolder> {
 
-    private List<SimpleActivityDTO> activities;
-    private OnItemClickListener<SimpleActivityDTO> itemClickListener;
+    private List<ReminderDTO> reminderList;
+    private OnItemClickListener<ReminderDTO> itemClickListener;
 
-    public ActivityLogAdapter(List<SimpleActivityDTO> activities,
-                              OnItemClickListener<SimpleActivityDTO> itemClickListener) {
-        this.activities = activities;
+    public ActivityLogAdapter(List<ReminderDTO> reminderList,
+                              OnItemClickListener<ReminderDTO> itemClickListener) {
+        this.reminderList = reminderList;
         this.itemClickListener = itemClickListener;
 
     }
@@ -39,17 +40,17 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ActivityLogAdapter.ViewHolder holder, int position) {
-        SimpleActivityDTO activityDTO = activities.get(position);
-        holder.container.setOnClickListener(v -> itemClickListener.onClick(activityDTO));
-        holder.imgActivity.setBackgroundResource(getAssociatedActivityIcon(activityDTO.getType()));
-        holder.txtTime.setText(activityDTO.getDate());
-        holder.txtLabel.setText(activityDTO.getType());
-        holder.txtRemainingTime.setText(TimeUtils.getRemainingTime(activityDTO.getDate()));
+        ReminderDTO reminderDTO = reminderList.get(position);
+        holder.container.setOnClickListener(v -> itemClickListener.onClick(reminderDTO));
+        holder.imgActivity.setBackgroundResource(getAssociatedActivityIcon(reminderDTO.getType()));
+        holder.txtTime.setText(reminderDTO.getDate());
+        holder.txtLabel.setText(reminderDTO.getType());
+//        holder.txtRemainingTime.setText(TimeUtils.getRemainingTime(reminderDTO.getDate()));
     }
 
     @Override
     public int getItemCount() {
-        return activities.size();
+        return reminderList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -61,7 +62,7 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
             container = itemView.findViewById(R.id.activity_container);
             txtLabel = itemView.findViewById(R.id.txt_activity_label);
             txtTime = itemView.findViewById(R.id.txt_time);
-            txtRemainingTime = itemView.findViewById(R.id.txt_remaining_time);
+//            txtRemainingTime = itemView.findViewById(R.id.txt_remaining_time);
             imgActivity = itemView.findViewById(R.id.img_activity_icon);
         }
     }
@@ -72,6 +73,8 @@ public class ActivityLogAdapter extends RecyclerView.Adapter<ActivityLogAdapter.
                 return R.drawable.sleeping_circle;
             case "diaper":
                 return R.drawable.diaper_circle;
+            case "feeding":
+                return R.drawable.feeding_circle;
             default:
                 return R.drawable.feeding_circle;
         }

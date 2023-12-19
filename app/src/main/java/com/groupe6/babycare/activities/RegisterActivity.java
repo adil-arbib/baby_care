@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
                 binding.inpConfPassword.setError("Passwords don't match");
                 return;
             }
-            String gender = binding.radioMother.isSelected() ?
+            String gender = binding.radioFather.isSelected() ?
                     "MALE" : "FEMALE";
             RegisterRequest registerRequest = new RegisterRequest(
                     binding.inputFirstname.getText().toString(),

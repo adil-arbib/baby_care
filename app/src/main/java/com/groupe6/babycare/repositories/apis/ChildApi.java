@@ -6,6 +6,7 @@ import com.groupe6.babycare.dtos.diaper.DiaperDTO;
 import com.groupe6.babycare.dtos.feeding.FoodDTO;
 import com.groupe6.babycare.dtos.healthcare.HealthCareDTO;
 import com.groupe6.babycare.dtos.sleeping.SleepDTO;
+import com.groupe6.babycare.dtos.todayInfo.TodayInfo;
 
 import java.util.List;
 
@@ -48,4 +49,9 @@ public interface ChildApi {
 
     @GET("/api/v1/children/{id}/healthCare")
     Call<List<HealthCareDTO>> getChildHealthCare(@Path("id") Long id);
+
+
+    @GET("/api/v1/children/{id}/todayInfo")
+    Call<TodayInfo> todayInfo(@Path("id") Long id);
+
 }

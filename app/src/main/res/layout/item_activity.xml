@@ -59,27 +59,7 @@
             app:layout_constraintTop_toTopOf="@+id/ic_clock" />
 
 
-        <ImageView
-            android:id="@+id/ic_clock2"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_clock_green"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txt_remaining_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="@font/jost_semi_bold"
-            android:text="2h 30min"
-            android:textColor="@color/green"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ic_clock2"
-            app:layout_constraintEnd_toStartOf="@+id/ic_clock2"
-            app:layout_constraintTop_toTopOf="@+id/ic_clock2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
