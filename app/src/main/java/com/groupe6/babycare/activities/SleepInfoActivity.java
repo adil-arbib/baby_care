@@ -18,6 +18,7 @@ import com.groupe6.babycare.listeners.ResponseListener;
 import com.groupe6.babycare.repositories.implementations.ActivityApiImpl;
 import com.groupe6.babycare.repositories.implementations.SleepApiImpl;
 import com.groupe6.babycare.utils.InputsUtils;
+import com.groupe6.babycare.utils.TimeUtils;
 
 public class SleepInfoActivity extends AppCompatActivity {
 
@@ -37,14 +38,20 @@ public class SleepInfoActivity extends AppCompatActivity {
             sleep = extras.getParcelable(GlobalKeys.SLEEP_KEY);
         }
         displayData();
+        binding.btnAdd.setOnClickListener(v -> {
+            saveChanges();
+        });
+        binding.btnCancel.setOnClickListener(v -> {
+            cancelChanges();
+        });
 
         binding.icBack.setActivity(this);
     }
 
     private void displayData() {
         binding.inputType.setText(sleep.getSleepType());
-        binding.inputStartDate.setText(sleep.getStartDate());
-        binding.inputEndDate.setText(sleep.getEndDate());
+        binding.inputStartDate.setText(TimeUtils.formatFromSqlDateToRegular(sleep.getStartDate()));
+        binding.inputEndDate.setText(TimeUtils.formatFromSqlDateToRegular(sleep.getEndDate()));
         binding.inputAwakenings.setText(sleep.getAwakenings()+"");
         binding.toggleButton.setChecked(sleep.getReminderState().toLowerCase().equals("COMPLETED"));
     }

@@ -6,6 +6,7 @@ public final class GlobalKeys {
     public static final String FEEDING_KEY = "feedingKey";
     public static final String ACTIVITY_KEY = "activityKey";
     public static final String NOTE_KEY = "noteKey";
+    public static final String TIPS_KEY = "tipsKey";
     public static final String SLEEP_KEY = "sleepKey";
     public static final String DIAPER_KEY = "diaperKey";
     public static final String HEALTHCARE_KEY = "healthcareKey";

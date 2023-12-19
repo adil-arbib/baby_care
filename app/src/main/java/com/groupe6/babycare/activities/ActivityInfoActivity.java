@@ -20,6 +20,7 @@ import com.groupe6.babycare.listeners.ResponseListener;
 import com.groupe6.babycare.repositories.implementations.ActivityApiImpl;
 import com.groupe6.babycare.repositories.implementations.FoodApiImpl;
 import com.groupe6.babycare.utils.InputsUtils;
+import com.groupe6.babycare.utils.TimeUtils;
 
 public class ActivityInfoActivity extends AppCompatActivity {
 
@@ -41,6 +42,9 @@ public class ActivityInfoActivity extends AppCompatActivity {
         displayData();
 
         binding.btnAdd.setOnClickListener(v -> saveChanges());
+        binding.btnCancel.setOnClickListener(v -> cancelChanges());
+
+
 
         binding.icBack.setActivity(this);
     }
@@ -48,8 +52,8 @@ public class ActivityInfoActivity extends AppCompatActivity {
     private void displayData() {
         binding.inputNote.setText(activity.getNotes());
         binding.inputType.setText(activity.getActivityType());
-        binding.inputDate.setText(activity.getReminderDate());
-        binding.toggleButton.setChecked(activity.getReminderState().toLowerCase().equals("completed"));
+        binding.inputDate.setText(TimeUtils.formatFromSqlDateToRegular(activity.getReminderDate()));
+        binding.toggleButton.setChecked(activity.getReminderState().toLowerCase().equals("COMPLETED"));
 
     }
 
