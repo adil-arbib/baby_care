@@ -1,5 +1,6 @@
 package com.groupe6.babycare.activities.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -53,9 +54,6 @@ public class HomeFragment extends Fragment implements OnItemClickListener<Remind
                         double sum = response.getRemindersCompleted() + response.getRemindersNotCompleted();
                         double percentage = (double) (response.getRemindersCompleted() / sum ) *100;
                         DecimalFormat decimalFormat = new DecimalFormat("##.##");
-                        Log.e("completed", response.getRemindersCompleted()+"");
-                        Log.e("nor completed", response.getRemindersNotCompleted()+"");
-                        Log.e("percentage", percentage+"");
                         binding.txtPercentage.setText(decimalFormat.format(percentage) + " %");
                         binding.txtRemainingActivities.setText(response.getRemindersCompleted()+" activities have been completed, and "+response.getRemindersNotCompleted()+" are still remaining");
                         binding.txtTip.setText(response.getTip());
@@ -72,6 +70,10 @@ public class HomeFragment extends Fragment implements OnItemClickListener<Remind
                     }
                 });
 
+        binding.txtLearnMore.setOnClickListener(v->{
+
+            startActivity(new Intent(getActivity(), TipsFragment.class));
+        });
 
 
     }
