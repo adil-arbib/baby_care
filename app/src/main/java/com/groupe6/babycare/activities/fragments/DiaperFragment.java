@@ -14,11 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.groupe6.babycare.R;
 import com.groupe6.babycare.activities.FeedingInfoActivity;
 import com.groupe6.babycare.activities.dialogs.AddChildDialog;
 import com.groupe6.babycare.activities.dialogs.AddDiaperDialog;
+import com.groupe6.babycare.activities.dialogs.DeleteDialog;
 import com.groupe6.babycare.adapters.DiaperAdapter;
 import com.groupe6.babycare.adapters.FoodAdapter;
 
@@ -27,9 +29,12 @@ import com.groupe6.babycare.databinding.FragmentDiaperBinding;
 import com.groupe6.babycare.dtos.diaper.DiaperDTO;
 import com.groupe6.babycare.dtos.error.ErrorDTO;
 import com.groupe6.babycare.dtos.feeding.FoodDTO;
+import com.groupe6.babycare.dtos.sleeping.SleepDTO;
 import com.groupe6.babycare.holders.GlobalObjectsHolder;
+import com.groupe6.babycare.listeners.OnDeleteConfirmationListener;
 import com.groupe6.babycare.listeners.OnItemClickListener;
 import com.groupe6.babycare.listeners.ResponseListener;
+import com.groupe6.babycare.listeners.SwipeListener;
 import com.groupe6.babycare.listeners.SwipeToDeleteCallback;
 import com.groupe6.babycare.repositories.implementations.ChildApiImpl;
 
@@ -38,7 +43,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class DiaperFragment extends Fragment implements OnItemClickListener<DiaperDTO> {
+public class DiaperFragment extends Fragment implements OnItemClickListener<DiaperDTO>, SwipeListener, OnDeleteConfirmationListener<DiaperDTO> {
 
     private FragmentDiaperBinding binding;
 
@@ -85,9 +90,9 @@ public class DiaperFragment extends Fragment implements OnItemClickListener<Diap
                 binding.recyclerView.setAdapter(diaperAdapter);
                 binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-//                SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(foodAdapter, FeedingFragment.this);
-//                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
-//                itemTouchHelper.attachToRecyclerView(binding.recyclerFeeding);
+                SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(diaperAdapter, DiaperFragment.this);
+                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
+                itemTouchHelper.attachToRecyclerView(binding.recyclerView);
 
             }
 
@@ -104,5 +109,27 @@ public class DiaperFragment extends Fragment implements OnItemClickListener<Diap
         Intent intent = new Intent(getActivity(), FeedingInfoActivity.class);
         intent.putExtra(GlobalKeys.DIAPER_KEY, (CharSequence) item);
         startActivity(intent);
+    }
+
+    @Override
+    public void onConfirm(int itemPosition) {
+        if(itemPosition != -1){
+            Toast.makeText(getContext(), "Activity deleted successfully !!", Toast.LENGTH_SHORT).show();
+            diaperAdapter.getDiaperList().remove(itemPosition);
+            diaperAdapter.notifyItemRemoved(itemPosition);
+        }else {
+            diaperAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onItemSwiped(int position) {
+        DeleteDialog<DiaperDTO> deleteDialog = new DeleteDialog<>(getContext(),position,DiaperFragment.this);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(deleteDialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT ;
+        deleteDialog.show();
+        deleteDialog.getWindow().setAttributes(lp);
     }
 }

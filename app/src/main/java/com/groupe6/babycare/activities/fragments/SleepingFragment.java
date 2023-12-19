@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -38,6 +39,7 @@ import com.groupe6.babycare.listeners.OnDeleteConfirmationListener;
 import com.groupe6.babycare.listeners.OnItemClickListener;
 import com.groupe6.babycare.listeners.ResponseListener;
 import com.groupe6.babycare.listeners.SwipeListener;
+import com.groupe6.babycare.listeners.SwipeToDeleteCallback;
 import com.groupe6.babycare.repositories.implementations.ChildApiImpl;
 
 import java.util.ArrayList;
@@ -86,6 +88,10 @@ public class SleepingFragment extends Fragment implements OnItemClickListener<Sl
                 SleepAdapter sleepAdapter = new SleepAdapter(response, SleepingFragment.this);
                 binding.recyclerView.setAdapter(sleepAdapter);
                 binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(adapter, SleepingFragment.this);
+                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
+                itemTouchHelper.attachToRecyclerView(binding.recyclerView);
 
             }
 

@@ -67,4 +67,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             date = itemView.findViewById(R.id.txt_date);
         }
     }
+
+    public List<NoteDTO> getNotes(){return notes;}
 }

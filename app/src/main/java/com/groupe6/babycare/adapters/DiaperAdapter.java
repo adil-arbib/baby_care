@@ -58,4 +58,11 @@ public class DiaperAdapter extends RecyclerView.Adapter<DiaperAdapter.ViewHolder
         }
     }
 
+    public List<DiaperDTO> getDiaperList(){
+        return diaperList;
+    }
+
+
+
+
 }
