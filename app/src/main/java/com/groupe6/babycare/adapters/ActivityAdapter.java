@@ -73,4 +73,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
         }
     }
+
+    public List<ActivityDTO> getActivities() {
+        return activities;
+    }
 }

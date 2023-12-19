@@ -150,6 +150,7 @@ public class FeedingFragment extends Fragment implements OnItemClickListener<Foo
     public void onConfirm(int itemPosition) {
         if(itemPosition != -1){
             FoodDTO food = foodAdapter.getFoods().get(itemPosition);
+            foodAdapter.getFoods().remove(itemPosition);
             Toast.makeText(getContext(), food.getLabel() +" deleted successfully !!", Toast.LENGTH_SHORT).show();
             foodAdapter.notifyItemRemoved(itemPosition);
         }else {
