@@ -84,10 +84,6 @@ public class SleepAdapter extends RecyclerView.Adapter<SleepAdapter.ViewHolder> 
     }
 
 
-    public List<SleepDTO> getSleepList() {
-        return sleepList;
-    }
-
     public void setSleepList(List<SleepDTO> sleepList) {
         this.sleepList = sleepList;
         notifyDataSetChanged();

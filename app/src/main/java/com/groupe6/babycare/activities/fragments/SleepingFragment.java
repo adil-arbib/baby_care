@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.text.Editable;
@@ -41,6 +42,7 @@ import com.groupe6.babycare.listeners.OnDeleteConfirmationListener;
 import com.groupe6.babycare.listeners.OnItemClickListener;
 import com.groupe6.babycare.listeners.ResponseListener;
 import com.groupe6.babycare.listeners.SwipeListener;
+import com.groupe6.babycare.listeners.SwipeToDeleteCallback;
 import com.groupe6.babycare.repositories.implementations.ChildApiImpl;
 
 import java.util.ArrayList;
@@ -48,7 +50,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class SleepingFragment extends Fragment implements OnItemClickListener<SleepDTO> {
+public class SleepingFragment extends Fragment implements OnItemClickListener<SleepDTO>, OnDeleteConfirmationListener<SleepDTO>, SwipeListener {
 
     FragmentSleepingBinding binding;
 
@@ -112,6 +114,9 @@ public class SleepingFragment extends Fragment implements OnItemClickListener<Sl
                 binding.recyclerView.setAdapter(sleepAdapter);
                 binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+                SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(sleepAdapter, SleepingFragment.this);
+                ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
+                itemTouchHelper.attachToRecyclerView(binding.recyclerView);
             }
 
             @Override
@@ -161,4 +166,8 @@ public class SleepingFragment extends Fragment implements OnItemClickListener<Sl
         deleteDialog.show();
         deleteDialog.getWindow().setAttributes(lp);
     }
+
+
+
+
 }
