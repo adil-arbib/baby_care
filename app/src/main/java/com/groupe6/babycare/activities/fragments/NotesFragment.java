@@ -24,9 +24,12 @@ import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.ActivityNoteInfoBinding;
 import com.groupe6.babycare.databinding.FragmentNotesBinding;
 import com.groupe6.babycare.databinding.FragmentSleepingBinding;
+import com.groupe6.babycare.dtos.error.ErrorDTO;
 import com.groupe6.babycare.dtos.notes.NoteDTO;
 import com.groupe6.babycare.listeners.OnItemClickListener;
 import com.groupe6.babycare.listeners.OnItemDeleteListener;
+import com.groupe6.babycare.listeners.ResponseListener;
+import com.groupe6.babycare.repositories.implementations.NoteApiImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,6 +40,8 @@ public class NotesFragment extends Fragment implements OnItemDeleteListener<Note
 
 
     FragmentNotesBinding binding;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,11 +55,7 @@ public class NotesFragment extends Fragment implements OnItemDeleteListener<Note
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle(R.string.notes);
 
-        NoteAdapter adapter =
-                new NoteAdapter(getStaticNotesData(),this, this);
-        binding.recyclerView.setAdapter(adapter);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        getData();
         binding.icAdd.setOnClickListener(v -> {
             AddNoteDialog dialog = new AddNoteDialog(getActivity());
             WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -66,21 +67,25 @@ public class NotesFragment extends Fragment implements OnItemDeleteListener<Note
         });
     }
 
-    private List<NoteDTO> getStaticNotesData() {
-        return new ArrayList<>(
-                Arrays.asList(
-                        new NoteDTO(1L, "Morning Reflections","ook a quiet moment to reflect on goals and priorities today. Excited about the possibilities ahead.","December 7, 2023"),
-                        new NoteDTO(1L, "Morning Reflections","ook a quiet moment to reflect on goals and priorities today. Excited about the possibilities ahead.","December 7, 2023"),
-                        new NoteDTO(1L, "Morning Reflections","ook a quiet moment to reflect on goals and priorities today. Excited about the possibilities ahead.","December 7, 2023"),
-                        new NoteDTO(1L, "Morning Reflections","ook a quiet moment to reflect on goals and priorities today. Excited about the possibilities ahead.","December 7, 2023"),
-                        new NoteDTO(1L, "Morning Reflections","ook a quiet moment to reflect on goals and priorities today. Excited about the possibilities ahead.","December 7, 2023"),
-                        new NoteDTO(1L, "Morning Reflections","ook a quiet moment to reflect on goals and priorities today. Excited about the possibilities ahead.","December 7, 2023"),
-                        new NoteDTO(1L, "Morning Reflections","ook a quiet moment to reflect on goals and priorities today. Excited about the possibilities ahead.","December 7, 2023"),
-                        new NoteDTO(1L, "Morning Reflections","ook a quiet moment to reflect on goals and priorities today. Excited about the possibilities ahead.","December 7, 2023"),
-                        new NoteDTO(1L, "Morning Reflections","ook a quiet moment to reflect on goals and priorities today. Excited about the possibilities ahead.","December 7, 2023"),
-                        new NoteDTO(1L, "Morning Reflections","ook a quiet moment to reflect on goals and priorities today. Excited about the possibilities ahead.","December 7, 2023")
-                )
-        );
+    private void getData() {
+        NoteApiImpl noteApi = NoteApiImpl.getInstance(getContext());
+        noteApi.getAllNotes(new ResponseListener<List<NoteDTO>>() {
+            @Override
+            public void onSuccess(List<NoteDTO> response) {
+                NoteAdapter noteAdapter = new NoteAdapter(
+                        response,
+                        NotesFragment.this,
+                        NotesFragment.this
+                );
+                binding.recyclerView.setAdapter(noteAdapter);
+                binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            }
+
+            @Override
+            public void onError(ErrorDTO error) {
+
+            }
+        });
     }
 
     @Override

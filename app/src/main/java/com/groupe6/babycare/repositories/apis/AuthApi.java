@@ -15,6 +15,10 @@ public interface AuthApi {
     Call<TokenResponse> login(@Body LoginRequest loginRequest);
 
 
+    @POST("/api/v1/auth/register")
+    Call<TokenResponse> register(@Body RegisterRequest registerRequest);
+
+
 
 
 }

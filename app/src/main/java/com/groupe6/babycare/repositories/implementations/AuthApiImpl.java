@@ -49,5 +49,23 @@ public class AuthApiImpl {
         });
     }
 
+    public void register(RegisterRequest registerRequest, final ResponseListener<TokenResponse> listener) {
+        authApi.register(registerRequest).enqueue(new Callback<TokenResponse>() {
+            @Override
+            public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+                if(response.isSuccessful()) listener.onSuccess(response.body());
+                else {
+                    ErrorDTO errorDTO = new ErrorDTO(response.message(), response.code());
+                    listener.onError(errorDTO);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TokenResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
 
 }
