@@ -48,7 +48,7 @@ public class SleepApiImpl {
         });
     }
 
-    public void createSleep(SleepDTO createRequest, final ResponseListener<SleepDTO> listener) {
+    public void createSleep(SleepDTO createRequest,final ResponseListener<SleepDTO> listener) {
         sleepApi.createSleep(createRequest).enqueue(new Callback<SleepDTO>() {
             @Override
             public void onResponse(Call<SleepDTO> call, Response<SleepDTO> response) {

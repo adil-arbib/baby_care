@@ -1,22 +1,17 @@
 package com.groupe6.babycare.activities.dialogs;
 
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.groupe6.babycare.R;
 import com.groupe6.babycare.dtos.children.ChildDTO;
 import com.groupe6.babycare.dtos.error.ErrorDTO;
@@ -26,7 +21,6 @@ import com.groupe6.babycare.repositories.implementations.ParentApiImpl;
 import com.groupe6.babycare.utils.InputsUtils;
 import com.groupe6.babycare.utils.SharedPreferencesUtils;
 
-import java.util.Calendar;
 
 
 public class AddChildDialog extends Dialog implements OnDatePickListener {
@@ -62,9 +56,7 @@ public class AddChildDialog extends Dialog implements OnDatePickListener {
 
         });
 
-        btnCancel.setOnClickListener(v -> {
-            dismiss();
-        });
+        btnCancel.setOnClickListener(v -> dismiss());
 
         btnAdd.setOnClickListener(v -> {
             ChildDTO child = new ChildDTO();

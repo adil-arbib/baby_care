@@ -11,10 +11,11 @@ public class SleepDTO implements Parcelable {
 
     private int awakenings;
     private String sleepType;
-
     private String reminderState;
 
     private String startDate;
+    private String endDate;
+    private Long childId;
 
     protected SleepDTO(Parcel in) {
         if (in.readByte() == 0) {
@@ -27,6 +28,8 @@ public class SleepDTO implements Parcelable {
         reminderState = in.readString();
         startDate = in.readString();
         endDate = in.readString();
+        endDate = in.readString();
+        childId= in.readLong();
     }
 
     public static final Creator<SleepDTO> CREATOR = new Creator<SleepDTO>() {
@@ -50,7 +53,16 @@ public class SleepDTO implements Parcelable {
                 ", reminderState='" + reminderState + '\'' +
                 ", startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
+                ", childId=" + childId +
                 '}';
+    }
+
+    public Long getChildId() {
+        return childId;
+    }
+
+    public void setChildId(Long childId) {
+        this.childId = childId;
     }
 
     public Long getId() {
@@ -101,15 +113,17 @@ public class SleepDTO implements Parcelable {
         this.endDate = endDate;
     }
 
-    private String endDate;
 
-    public SleepDTO(Long id, int awakenings, String sleepType, String reminderState, String startDate, String endDate) {
+    public SleepDTO(){}
+
+    public SleepDTO(Long id, int awakenings, String sleepType, String reminderState, String startDate, String endDate, Long childId) {
         this.id = id;
         this.awakenings = awakenings;
         this.sleepType = sleepType;
         this.reminderState = reminderState;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.childId = childId;
     }
 
     @Override
@@ -130,5 +144,6 @@ public class SleepDTO implements Parcelable {
         parcel.writeString(reminderState);
         parcel.writeString(startDate);
         parcel.writeString(endDate);
+        parcel.writeLong(childId);
     }
 }
