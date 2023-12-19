@@ -2,6 +2,7 @@ package com.groupe6.babycare.repositories.implementations;
 import android.content.Context;
 
 import com.groupe6.babycare.dtos.error.ErrorDTO;
+import com.groupe6.babycare.dtos.healthcare.HealthCareCreateDTO;
 import com.groupe6.babycare.dtos.healthcare.HealthCareDTO;
 import com.groupe6.babycare.listeners.ResponseListener;
 import com.groupe6.babycare.repositories.ApiClient;
@@ -50,10 +51,10 @@ public class HealthCareImpl {
     }
 
 
-    public void createHealthCare(HealthCareDTO createRequest, final ResponseListener<HealthCareDTO> listener) {
-        healthCareApi.createHealth(createRequest).enqueue(new Callback<HealthCareDTO>() {
+    public void createHealthCare(HealthCareCreateDTO createRequest, final ResponseListener<HealthCareCreateDTO> listener) {
+        healthCareApi.createHealth(createRequest).enqueue(new Callback<HealthCareCreateDTO>() {
             @Override
-            public void onResponse(Call<HealthCareDTO> call, Response<HealthCareDTO> response) {
+            public void onResponse(Call<HealthCareCreateDTO> call, Response<HealthCareCreateDTO> response) {
                 if (response.isSuccessful()) {
                     listener.onSuccess(response.body());
                 } else {
@@ -63,7 +64,7 @@ public class HealthCareImpl {
             }
 
             @Override
-            public void onFailure(Call<HealthCareDTO> call, Throwable t) {
+            public void onFailure(Call<HealthCareCreateDTO> call, Throwable t) {
                 // Handle failure
             }
         });

@@ -1,5 +1,6 @@
 package com.groupe6.babycare.repositories.apis;
 
+import com.groupe6.babycare.dtos.healthcare.HealthCareCreateDTO;
 import com.groupe6.babycare.dtos.healthcare.HealthCareDTO;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface HealthCareApi {
     Call<List<HealthCareDTO>> getAll();
 
     @POST("/api/v1/healthCare/add")
-    Call<HealthCareDTO> createHealth(@Body HealthCareDTO createRequest);
+    Call<HealthCareCreateDTO> createHealth(@Body HealthCareCreateDTO createRequest);
 
     @PUT("/api/v1/healthCare/{id}/update")
     Call<HealthCareDTO> updateHealthCare(@Body HealthCareDTO updateRequest, @Path("id") Long id);

@@ -8,6 +8,7 @@ import com.groupe6.babycare.dtos.children.ChildDTO;
 import com.groupe6.babycare.dtos.diaper.DiaperDTO;
 import com.groupe6.babycare.dtos.error.ErrorDTO;
 import com.groupe6.babycare.dtos.feeding.FoodDTO;
+import com.groupe6.babycare.dtos.healthcare.HealthCareDTO;
 import com.groupe6.babycare.dtos.sleeping.SleepDTO;
 import com.groupe6.babycare.listeners.ResponseListener;
 import com.groupe6.babycare.repositories.ApiClient;
@@ -191,6 +192,24 @@ public class ChildApiImpl {
 
             @Override
             public void onFailure(Call<List<ActivityDTO>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getChildHealthCare(Long childId, final ResponseListener<List<HealthCareDTO>> listener) {
+        childApi.getChildHealthCare(childId).enqueue(new Callback<List<HealthCareDTO>>() {
+            @Override
+            public void onResponse(Call<List<HealthCareDTO>> call, Response<List<HealthCareDTO>> response) {
+                if(response.isSuccessful()) listener.onSuccess(response.body());
+                else {
+                    ErrorDTO errorDTO = new ErrorDTO(response.message(), response.code());
+                    listener.onError(errorDTO);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<HealthCareDTO>> call, Throwable t) {
 
             }
         });

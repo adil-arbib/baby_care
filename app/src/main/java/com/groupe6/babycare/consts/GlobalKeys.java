@@ -8,6 +8,7 @@ public final class GlobalKeys {
     public static final String NOTE_KEY = "noteKey";
     public static final String SLEEP_KEY = "sleepKey";
     public static final String DIAPER_KEY = "diaperKey";
+    public static final String HEALTHCARE_KEY = "healthcareKey";
 
 
 }
