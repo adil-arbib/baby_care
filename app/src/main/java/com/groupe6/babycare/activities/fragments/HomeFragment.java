@@ -1,5 +1,6 @@
 package com.groupe6.babycare.activities.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.groupe6.babycare.R;
 import com.groupe6.babycare.adapters.ActivityLogAdapter;
@@ -43,6 +45,10 @@ public class HomeFragment extends Fragment implements OnItemClickListener<Simple
                 new ActivityLogAdapter( getStaticActivities(),this);
         binding.recyclerActivities.setAdapter(adapter);
         binding.recyclerActivities.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        TextView learnMoreTextView = view.findViewById(R.id.txt_learn_more);
+
+        learnMoreTextView.setOnClickListener(v -> startActivity(new Intent(getContext(), TipsFragment.class)));
     }
 
 
