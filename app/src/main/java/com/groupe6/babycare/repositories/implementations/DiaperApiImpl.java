@@ -3,6 +3,7 @@ package com.groupe6.babycare.repositories.implementations;
 
 import android.content.Context;
 
+import com.groupe6.babycare.dtos.diaper.DiaperCreateDTO;
 import com.groupe6.babycare.dtos.diaper.DiaperDTO;
 import com.groupe6.babycare.dtos.error.ErrorDTO;
 import com.groupe6.babycare.listeners.ResponseListener;
@@ -49,10 +50,10 @@ public class DiaperApiImpl {
         });
     }
 
-    public void addDiaper(DiaperDTO diaperDTO, final ResponseListener<DiaperDTO> listener) {
-        diaperApi.add(diaperDTO).enqueue(new Callback<DiaperDTO>() {
+    public void addDiaper(DiaperCreateDTO diaperDTO, final ResponseListener<DiaperCreateDTO> listener) {
+        diaperApi.add(diaperDTO).enqueue(new Callback<DiaperCreateDTO>() {
             @Override
-            public void onResponse(Call<DiaperDTO> call, Response<DiaperDTO> response) {
+            public void onResponse(Call<DiaperCreateDTO> call, Response<DiaperCreateDTO> response) {
                 if (response.isSuccessful()) {
                     listener.onSuccess(response.body());
                 } else {
@@ -62,7 +63,7 @@ public class DiaperApiImpl {
             }
 
             @Override
-            public void onFailure(Call<DiaperDTO> call, Throwable t) {
+            public void onFailure(Call<DiaperCreateDTO> call, Throwable t) {
 
             }
         });

@@ -1,5 +1,6 @@
 package com.groupe6.babycare.repositories.apis;
 
+import com.groupe6.babycare.dtos.diaper.DiaperCreateDTO;
 import com.groupe6.babycare.dtos.diaper.DiaperDTO;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface DiaperApi {
     Call<List<DiaperDTO>> getAll();
 
     @POST("/api/v1/diaper")
-    Call<DiaperDTO> add(@Body DiaperDTO diaperDTO);
+    Call<DiaperCreateDTO> add(@Body DiaperCreateDTO diaperDTO);
 
     @PUT("/api/v1/diaper/{id}")
     Call<DiaperDTO> update(@Body DiaperDTO diaperDTO, @Path("id") Long id);
