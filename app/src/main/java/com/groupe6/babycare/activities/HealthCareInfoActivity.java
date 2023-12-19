@@ -38,12 +38,16 @@ public class HealthCareInfoActivity  extends AppCompatActivity {
         }
         displayData();
 
-        binding.icBack.setActivity(this);
+
 
 
         binding.btnSave.setOnClickListener(v -> {
             saveChanges();
         });
+        binding.btnCancel.setOnClickListener(v -> {
+            cancelChanges();
+        });
+        binding.icBack.setActivity(this);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
