@@ -26,8 +26,12 @@ import com.groupe6.babycare.consts.GlobalKeys;
 import com.groupe6.babycare.databinding.FragmentActivitiesBinding;
 import com.groupe6.babycare.databinding.FragmentSleepingBinding;
 import com.groupe6.babycare.dtos.activities.ActivityDTO;
+import com.groupe6.babycare.dtos.error.ErrorDTO;
 import com.groupe6.babycare.dtos.sleeping.SleepDTO;
+import com.groupe6.babycare.holders.GlobalObjectsHolder;
 import com.groupe6.babycare.listeners.OnItemClickListener;
+import com.groupe6.babycare.listeners.ResponseListener;
+import com.groupe6.babycare.repositories.implementations.ChildApiImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,11 +55,8 @@ public class ActivitiesFragment extends Fragment implements OnItemClickListener<
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle(R.string.activities);
 
-        ActivityAdapter adapter =
-                new ActivityAdapter(getStaticActivityData(),this);
+        getData();
 
-        binding.recyclerView.setAdapter(adapter);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         binding.icAdd.setOnClickListener(v -> {
             AddActivityDialog dialog = new AddActivityDialog(getActivity());
@@ -68,19 +69,22 @@ public class ActivitiesFragment extends Fragment implements OnItemClickListener<
         });
     }
 
-    private List<ActivityDTO> getStaticActivityData() {
-        return new ArrayList<>(
-                Arrays.asList(
-                        new ActivityDTO(1L,"type","10:00 PM Nov 25, 2032", "done", "Reading picture books together"),
-                        new ActivityDTO(1L,"type","10:00 PM Nov 25, 2032", "done", "Reading picture books together"),
-                        new ActivityDTO(1L,"type","10:00 PM Nov 25, 2032", "undone", "Reading picture books together"),
-                        new ActivityDTO(1L,"type","10:00 PM Nov 25, 2032", "done", "Reading picture books together"),
-                        new ActivityDTO(1L,"type","10:00 PM Nov 25, 2032", "undone", "Reading picture books together"),
-                        new ActivityDTO(1L,"type","10:00 PM Nov 25, 2032", "undone", "Reading picture books together"),
-                        new ActivityDTO(1L,"type","10:00 PM Nov 25, 2032", "done", "Reading picture books together"),
-                        new ActivityDTO(1L,"type","10:00 PM Nov 25, 2032", "undone", "Reading picture books together")
-                )
-        );
+    private void getData() {
+        ChildApiImpl childApi = ChildApiImpl.getInstance(getContext());
+        childApi.getChildActivities(GlobalObjectsHolder.getInstance().getCurrentChild().getId(),
+                new ResponseListener<List<ActivityDTO>>() {
+                    @Override
+                    public void onSuccess(List<ActivityDTO> response) {
+                        ActivityAdapter activityAdapter = new ActivityAdapter(response,ActivitiesFragment.this);
+                        binding.recyclerView.setAdapter(activityAdapter);
+                        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    }
+
+                    @Override
+                    public void onError(ErrorDTO error) {
+                        Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override

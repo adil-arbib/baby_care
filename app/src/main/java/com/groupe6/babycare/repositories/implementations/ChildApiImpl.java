@@ -3,6 +3,7 @@ package com.groupe6.babycare.repositories.implementations;
 
 import android.content.Context;
 
+import com.groupe6.babycare.dtos.activities.ActivityDTO;
 import com.groupe6.babycare.dtos.children.ChildDTO;
 import com.groupe6.babycare.dtos.diaper.DiaperDTO;
 import com.groupe6.babycare.dtos.error.ErrorDTO;
@@ -172,6 +173,24 @@ public class ChildApiImpl {
 
             @Override
             public void onFailure(Call<List<DiaperDTO>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getChildActivities(Long childId, final ResponseListener<List<ActivityDTO>> listener) {
+        childApi.getChildActivities(childId).enqueue(new Callback<List<ActivityDTO>>() {
+            @Override
+            public void onResponse(Call<List<ActivityDTO>> call, Response<List<ActivityDTO>> response) {
+                if(response.isSuccessful()) listener.onSuccess(response.body());
+                else {
+                    ErrorDTO errorDTO = new ErrorDTO(response.message(), response.code());
+                    listener.onError(errorDTO);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ActivityDTO>> call, Throwable t) {
 
             }
         });

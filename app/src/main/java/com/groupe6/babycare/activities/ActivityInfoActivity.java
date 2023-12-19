@@ -3,6 +3,7 @@ package com.groupe6.babycare.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -45,20 +46,25 @@ public class ActivityInfoActivity extends AppCompatActivity {
     }
 
     private void displayData() {
-        binding.inputNote.setText(activity.getNote());
-        binding.inputType.setText(activity.getType());
-        binding.inputDate.setText(activity.getDate());
-        binding.toggleButton.setChecked(activity.getStatus().toLowerCase().equals("done"));
+        binding.inputNote.setText(activity.getNotes());
+        binding.inputType.setText(activity.getActivityType());
+        binding.inputDate.setText(activity.getReminderDate());
+        binding.toggleButton.setChecked(activity.getReminderState().toLowerCase().equals("completed"));
 
     }
 
     private void saveChanges() {
         if(!InputsUtils.validateInputs(binding.inputNote, binding.inputDate))
             return;
+
         ActivityDTO activityDTO = new ActivityDTO();
-        activityDTO.setNote(binding.inputNote.getText().toString());
-        activityDTO.setType(binding.inputType.getText().toString());
-        activityDTO.setDate(binding.inputDate.getText().toString());
+        activityDTO.setId(activity.getId());
+        activityDTO.setNotes(binding.inputNote.getText().toString());
+        activityDTO.setActivityType(binding.inputType.getText().toString());
+        activityDTO.setReminderDate(activity.getReminderDate());
+        activityDTO.setReminderState(binding.toggleButton.isSelected() ? "COMPLETED" : "UPCOMING");
+
+        Log.e("OUTPUT", activityDTO.toString());
 
         ActivityApiImpl activityApi = ActivityApiImpl.getInstance(getApplicationContext());
         activityApi.updateActivity(activityDTO, activity.getId(), new ResponseListener<ActivityDTO>() {
@@ -69,6 +75,7 @@ public class ActivityInfoActivity extends AppCompatActivity {
 
             @Override
             public void onError(ErrorDTO error) {
+                Toast.makeText(ActivityInfoActivity.this, "An error was occurred!!", Toast.LENGTH_SHORT).show();
 
             }
         });

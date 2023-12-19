@@ -5,23 +5,28 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ActivityDTO implements Parcelable {
 
     private Long id;
-    private String type;
-    private String date;
 
-    private String status;
+    private String activityType;
+    private String reminderDate;
 
-    private String note;
+    private String reminderState;
 
+    private String notes;
 
-    public ActivityDTO(Long id, String type, String date, String status, String note) {
+    public ActivityDTO() {
+    }
+
+    public ActivityDTO(Long id, String activityType, String reminderDate, String reminderState, String notes) {
         this.id = id;
-        this.type = type;
-        this.date = date;
-        this.status = status;
-        this.note = note;
+        this.activityType = activityType;
+        this.reminderDate = reminderDate;
+        this.reminderState = reminderState;
+        this.notes = notes;
     }
 
     protected ActivityDTO(Parcel in) {
@@ -30,10 +35,29 @@ public class ActivityDTO implements Parcelable {
         } else {
             id = in.readLong();
         }
-        type = in.readString();
-        date = in.readString();
-        status = in.readString();
-        note = in.readString();
+        activityType = in.readString();
+        reminderDate = in.readString();
+        reminderState = in.readString();
+        notes = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(id);
+        }
+        dest.writeString(activityType);
+        dest.writeString(reminderDate);
+        dest.writeString(reminderState);
+        dest.writeString(notes);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<ActivityDTO> CREATOR = new Creator<ActivityDTO>() {
@@ -48,10 +72,6 @@ public class ActivityDTO implements Parcelable {
         }
     };
 
-    public ActivityDTO() {
-
-    }
-
     public Long getId() {
         return id;
     }
@@ -60,65 +80,46 @@ public class ActivityDTO implements Parcelable {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getActivityType() {
+        return activityType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setActivityType(String activityType) {
+        this.activityType = activityType;
     }
 
-    public String getDate() {
-        return date;
+    public String getReminderDate() {
+        return reminderDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setReminderDate(String reminderDate) {
+        this.reminderDate = reminderDate;
     }
 
-    public String getStatus() {
-        return status;
+    public String getReminderState() {
+        return reminderState;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setReminderState(String reminderState) {
+        this.reminderState = reminderState;
     }
 
-    public String getNote() {
-        return note;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     @Override
     public String toString() {
         return "ActivityDTO{" +
                 "id=" + id +
-                ", type='" + type + '\'' +
-                ", date='" + date + '\'' +
-                ", status='" + status + '\'' +
-                ", note='" + note + '\'' +
+                ", activityType='" + activityType + '\'' +
+                ", reminderDate='" + reminderDate + '\'' +
+                ", reminderState='" + reminderState + '\'' +
+                ", notes='" + notes + '\'' +
                 '}';
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        if (id == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeLong(id);
-        }
-        dest.writeString(type);
-        dest.writeString(date);
-        dest.writeString(status);
-        dest.writeString(note);
     }
 }

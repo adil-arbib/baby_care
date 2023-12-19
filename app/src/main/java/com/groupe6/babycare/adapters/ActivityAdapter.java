@@ -40,10 +40,10 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ActivityAdapter.ViewHolder holder, int position) {
         ActivityDTO activity = activities.get(position);
-        holder.date.setText(activity.getDate());
-        holder.note.setText(String.valueOf(activity.getNote()));
-        holder.type.setText(activity.getType());
-        holder.checkBox.setChecked(activity.getStatus().equals("COMPLETED"));
+        holder.date.setText(activity.getReminderDate());
+        holder.note.setText(String.valueOf(activity.getNotes()));
+        holder.type.setText(activity.getActivityType());
+        holder.checkBox.setChecked(activity.getReminderState().equals("COMPLETED"));
         holder.container.setOnClickListener(v -> itemClickListener.onClick(activity));
     }
 
